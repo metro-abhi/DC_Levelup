@@ -105,7 +105,7 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; background: 
   background: rgba(255, 255, 255, .97); border: calc(var(--u) * .3) solid var(--navy); box-shadow: calc(var(--u) * .55) calc(var(--u) * .55) 0 rgba(0, 31, 69, .4);
   padding: calc(var(--u) * 2) calc(var(--u) * 2.4) calc(var(--u) * 1.6); display: flex; flex-direction: column; gap: calc(var(--u) * 1.3 * var(--fs)); overflow: hidden;
   font-size: calc(var(--u) * 1.04 * var(--fs)); line-height: 1.4;
-  transform: translate3d(calc(var(--px) * var(--u) * .35), calc(var(--py) * var(--u) * .25), 0); transition: opacity .18s steps(3), transform .4s cubic-bezier(.2, .7, .3, 1), translate .25s steps(4); }
+  transform: translate3d(calc(var(--px) * var(--u) * .35), calc(var(--py) * var(--u) * .25), 0); transition: opacity .26s ease, transform .4s cubic-bezier(.2, .7, .3, 1), translate .32s cubic-bezier(.2, .7, .3, 1); }
 .panel::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: calc(var(--u) * .5); background: repeating-linear-gradient(90deg, var(--gold) 0 calc(var(--u) * 1), var(--gold2) calc(var(--u) * 1) calc(var(--u) * 2)); }
 .panel.out, .intro-on .panel, .peek .panel, .gaming .panel { opacity: 0; translate: calc(var(--u) * 3) 0; pointer-events: none; }
 
@@ -1455,6 +1455,34 @@ mark.hl { background: linear-gradient(transparent 55%, rgba(255, 184, 28, .55) 5
 .b3d { margin-top: auto; display: flex; align-items: center; gap: .5em; font-weight: 800; color: var(--navy); font-size: calc(var(--u) * 1.05); }
 .b3d img { width: calc(var(--u) * 2); height: calc(var(--u) * 2); }
 .wgrid .ccol { align-self: start; margin-top: 0; } .wgrid .cbig { align-self: start; }
+
+/* ---- round 3f: display settings, previews, smoother flow ---- */
+#scene, #scenetxt { filter: brightness(var(--sdim, 1)) saturate(var(--ssat, 1)); transition: filter .35s ease; }
+.panel > * { --u: calc(min(1vw, 1.7778vh) * var(--cz, 1)); }
+.panel { --cz: 1; }
+.stage.wide-on .panel { left: calc(var(--u) * 1.6); top: calc(var(--u) * 6); bottom: calc(var(--u) * 5.2); padding-bottom: calc(var(--u) * 1.6) !important; }
+.stage.wide-on .plate { top: auto; bottom: calc(var(--u) * 1.3); left: auto; right: calc(var(--u) * 2.4); width: auto; z-index: 7; padding: calc(var(--u) * .35) calc(var(--u) * .7); border-top-width: calc(var(--u) * .25); }
+.stage.wide-on .plate .pl-k { display: none; } .stage.wide-on .plate .pl-p { margin: 0; }
+.stage.wide-on .plate .pp .av { width: calc(var(--u) * 2.2); height: calc(var(--u) * 2.2); }
+.ctp { position: absolute; right: calc(var(--u) * .35); bottom: calc(var(--u) * .35); z-index: 3; pointer-events: none; font: 700 calc(var(--u) * .58) / 1 Manrope, sans-serif; letter-spacing: .02em; color: #fff; background: rgba(0, 45, 114, .78); padding: .4em .7em; border-radius: 99px; opacity: .8; transition: opacity .2s, background .2s; white-space: nowrap; }
+:hover > .ctp { opacity: 1; background: var(--navy); }
+.dpop { position: absolute; z-index: 30; left: calc(var(--u) * 1.4); bottom: calc(var(--u) * 5); width: calc(var(--u) * 26); background: #fff; border: calc(var(--u) * .22) solid var(--navy); box-shadow: calc(var(--u) * .45) calc(var(--u) * .45) 0 rgba(0, 31, 69, .35); padding: calc(var(--u) * 1) calc(var(--u) * 1.2); color: var(--navy); font-family: Manrope, sans-serif; animation: dpIn .22s cubic-bezier(.2, .8, .3, 1); }
+@keyframes dpIn { from { opacity: 0; translate: 0 calc(var(--u) * 1); } }
+.dpop h3 { margin: 0 0 calc(var(--u) * .6); font-size: calc(var(--u) * .95); color: var(--navy); }
+.drow { display: flex; align-items: center; gap: calc(var(--u) * .7); font-weight: 800; font-size: calc(var(--u) * .92); margin-top: calc(var(--u) * .5); }
+.drow > span { width: calc(var(--u) * 7.2); flex: none; }
+.drow input[type=range] { flex: 1; accent-color: var(--navy); }
+.drow output { min-width: calc(var(--u) * 4); text-align: center; font-weight: 800; font-size: calc(var(--u) * .85); color: #1F5AA8; }
+.dseg { flex: 1; display: flex; gap: calc(var(--u) * .35); align-items: center; }
+.dseg button { flex: 1; font: 800 calc(var(--u) * .82) Manrope, sans-serif; color: var(--navy); background: #EEF4FB; border: calc(var(--u) * .14) solid var(--navy); padding: .45em .5em; cursor: pointer; }
+.dseg button:hover, .dseg button[aria-pressed="true"] { background: var(--gold); }
+.dhint { font-size: calc(var(--u) * .7); color: var(--ink3); margin: calc(var(--u) * .2) 0 0 calc(var(--u) * 7.9); }
+.bhit { position: absolute; left: 0; right: 0; bottom: 0; height: calc(var(--u) * 1.1); z-index: 6; cursor: pointer; }
+.btip { position: absolute; bottom: calc(var(--u) * 1.4); translate: -50% 0; white-space: nowrap; background: var(--navy); color: #fff; font: 700 calc(var(--u) * .78) Manrope, sans-serif; padding: .45em .8em; border: calc(var(--u) * .12) solid var(--gold); opacity: 0; pointer-events: none; transition: opacity .15s; }
+.bhit:hover .btip { opacity: 1; }
+.bhit:hover ~ .bar, .bhit:hover + .bar { height: calc(var(--u) * .8); }
+.bar i { transition: width .45s cubic-bezier(.2, .8, .3, 1) !important; }
+.panel.fx-rise:not(.out), .panel.fx-slide:not(.out), .panel.fx-zoom:not(.out), .panel.fx-wipe:not(.out) { animation-duration: .5s !important; animation-timing-function: cubic-bezier(.2, .8, .25, 1) !important; }
 </style>
 </head>
 <body>
@@ -2024,7 +2052,7 @@ const STOPS = [
   /* report: numbers exactly as on the report image (deck slide 4) */
   set("report", { ticks: [], kpis: [], sub: "One stop overview of platform KPIs", rep: {
     hero: { h: "FSD Digital Sales", v: 4.0, g: "+23.3%", share: "63% share", sg: "+1.6%", parts: [["M.Shop & local solutions", 67.5, "2.7bn €", "+15.5%", "67.5% share", "-6.3%", 1], ["M.Companion", 32.5, "1.3bn €", "+43.4%", "32.5% share", "+16.3%", 0]] },
-    cards: [["value", "Digital Sales", 16.1, "%", "+21.6%", "share of sales · 1.1 pp below target"], ["goal", "PDEs", 606.1, "m", "+23.8%", "108.2% target achievement"], ["customer", "Active buying digital identities", 4.5, "m", "+29.2%", "34.0% of total buying · +35.5%"], ["unlock", "Active card holders", 5.4, "m", "+34.8%", "76.7% buying · -2.8%"]] } });
+    cards: [["value", "Digital Sales", 16.1, "%", "+21.6%", "share of sales · 1.1 pp below target"], ["goal", "PDEs", ">600", "M", "+23.8%", "Purchase Driving Events in full FY25/26 · 108.2% target achievement"], ["customer", "Active buying digital identities", 4.5, "m", "+29.2%", "34.0% of total buying · +35.5%"], ["unlock", "Active card holders", 5.4, "m", "+34.8%", "76.7% buying · -2.8%"]] } });
   by.dash1.branches[0].leaves[0] = ["FSD", 1.3, "bn €", 1, "43.4%"];
   set("o2o", { secs: [], shots: [], facts: [["websites", "NextCMS", "40k €", "+22%", "Contributed ==40k €== to sales (+22%)"], ["catalogue", "Digital catalogues", "47k €", "+18%", "Drove ==47k €== in sales (+18%) via dynamic catalogues and product interactions"], ["delivery", "M.Shop", "7.2m €", "+17,3%", "Contributed ==33%== of sales, an uplift of 7.2m € (+17,3%)"], ["app", "M.Companion", "31m €", "+45%", "Attributed sales up 31m € (+45%): ==66% of the O2O sales=="]] });
 
@@ -3404,6 +3432,8 @@ const Art = (() => {
           else { const off = snap(e * W); drawScene(A, t, off, 0); drawScene(B, t, off - W, 0); Art.sprite(ctx, 52, Art.meta(B).feet, 1 + Math.floor(now / 170) % 2, true, 0); }
           drawRain(t); return;
         }
+        if (tr.type === 'blinds' || tr.type === 'pixel') tr.type = 'fade';
+        if (tr.type === 'fade') { drawScene(A, t); ctx.globalAlpha = e; drawScene(B, t); ctx.globalAlpha = 1; drawRain(t); return; }
         if (tr.type === 'iris' || tr.type === 'blinds' || tr.type === 'pixel') {
           drawScene(A, t); ctx.save(); ctx.beginPath();
           let r = 0;
@@ -3416,7 +3446,7 @@ const Art = (() => {
         }
         if (tr.type === 'x') { const off = snap(e * W) * d; drawScene(A, t, -off, 0); drawScene(B, t, d * W - off, 0); }
         else if (tr.type === 'up' || tr.type === 'down') { const vd = (tr.type === 'down' ? 1 : -1) * d, off = snap(e * H) * vd; drawScene(A, t, 0, -off); drawScene(B, t, 0, vd * H - off); }
-        else { const s = d > 0 ? 1 + e * 1.4 : 2.4 - e * 1.4, Z = d > 0 ? A : B, O = d > 0 ? B : A; drawScene(O, t); ctx.globalAlpha = d > 0 ? 1 - Math.floor(e * 6) / 6 : Math.floor(e * 6) / 6 + .01; ctx.drawImage(Art.base(Z), 150 * (1 - s), 120 * (1 - s), W * s, H * s); ctx.globalAlpha = 1; if (d < 0 && e > .98) drawScene(B, t); }
+        else { const s = d > 0 ? 1 + e * 1.4 : 2.4 - e * 1.4, Z = d > 0 ? A : B, O = d > 0 ? B : A; drawScene(O, t); ctx.globalAlpha = d > 0 ? 1 - e : e + .01; ctx.drawImage(Art.base(Z), 150 * (1 - s), 120 * (1 - s), W * s, H * s); ctx.globalAlpha = 1; if (d < 0 && e > .98) drawScene(B, t); }
         if (tr.type !== 'zoom' && (mA.sprite || mB.sprite)) { const fa = mA.sprite ? mA.feet : mB.feet, fb = mB.sprite ? mB.feet : mA.feet; const off = tr.type === 'x' && !mB.sprite ? snap(e * W) * d : 0; Art.sprite(ctx, 52 - off, Math.round(fa + (fb - fa) * e), 1 + Math.floor(now / 170) % 2, d < 0, Art.cartAt(d > 0 ? A : B, 99)); }
         drawRain(t); return;
       }
@@ -3475,7 +3505,7 @@ const Art = (() => {
   ['pointermove', 'keydown', 'touchstart', 'wheel'].forEach(ev => addEventListener(ev, idleReset, { passive: true })); idleReset();
   /* ---------- help overlay ---------- */
   const help = document.createElement('div'); help.className = 'help'; help.hidden = true;
-  help.innerHTML = '<div class="hbox"><h2 class="pix">Controls</h2><div class="hcols"><ul><li><b>← →</b> previous / next part or slide</li><li><b>Shift + ← →</b> previous / next topic</li><li><b>1–7</b> spotlight a section type</li><li><b>P</b> who presents what</li><li><b>O</b> overview of every slide</li><li><b>/</b> search all slides</li><li><b>Home / End</b> first / last slide</li></ul><ul><li><b>S</b> spotlight on / off</li><li><b>F</b> show / hide items to confirm</li><li><b>T</b> 90-minute pacing timer</li><li><b>L</b> laser pointer</li><li><b>.</b> blackout screen</li><li><b>V</b> view scene · <b>G</b> mini-game</li></ul></div><p>Psst: some words and key combinations do things. Try typing a few, or searching for them.</p><button class="pix">Close</button></div>';
+  help.innerHTML = '<div class="hbox"><h2 class="pix">Controls</h2><div class="hcols"><ul><li><b>← →</b> previous / next part or slide</li><li><b>Shift + ← →</b> previous / next topic</li><li><b>1–7</b> spotlight a section type</li><li><b>P</b> who presents what</li><li><b>O</b> overview of every slide</li><li><b>/</b> search all slides</li><li><b>D</b> dim background · <b>− +</b> slide size · <b>E</b> wide slides</li><li><b>Home / End</b> first / last slide</li></ul><ul><li><b>S</b> spotlight on / off</li><li><b>F</b> show / hide items to confirm</li><li><b>T</b> 90-minute pacing timer</li><li><b>L</b> laser pointer</li><li><b>.</b> blackout screen</li><li><b>V</b> view scene · <b>G</b> mini-game</li></ul></div><p>Psst: some words and key combinations do things. Try typing a few, or searching for them.</p><button class="pix">Close</button></div>';
   stage.appendChild(help); help.addEventListener('click', () => { help.hidden = true; });
 
   /* ---------- optional mini-game: fill the trolley ---------- */
@@ -3636,8 +3666,8 @@ const Art = (() => {
     const parts = H.parts.map(([n, p, v, g, sh, sd, dn], j) => `<div class="rpart j${j}"><span class="rpl">${esc(n)}</span><b class="rpv">${esc(v)}</b><span class="rps">${rch(g)}<span>growth</span></span><span class="rps">${esc(sh)} ${rch(sd, dn)}</span></div>`).join('');
     const hero = `<div class="rhero step" data-k="succ" style="--d:0"><div class="rh-l"><div class="rhk pix">${esc(H.h)}</div><div class="rhv"><span class="count" data-to="${H.v}" data-dp="1">0</span><small>bn €</small></div><div class="rhc">${rch(H.g)}<span>${esc(H.share)}</span>${rch(H.sg)}</div></div>
       <div class="rh-r"><div class="rsplit">${H.parts.map(([n, p, v], j) => `<i class="${j ? 'b' : 'a'}" style="--w:${p}">${esc(v)}</i>`).join('')}</div><div class="rparts">${parts}</div></div></div>`;
-    const cards = s.rep.cards.map(([ic, h, v, u, g, sub], i) => `<div class="rc step" data-k="succ" style="--d:${i + 1}"><div class="rct"><img class="rci pxi" src="${IC(ic)}" alt=""><span class="rck pix">${esc(h)}</span></div><div class="rcv"><span class="count" data-to="${v}" data-dp="1">0</span><small>${esc(u)}</small></div>${rch(g)}<span class="rcs">${esc(sub.replace(/-(\d)/, '−$1'))}</span></div>`).join('');
-    return `<div class="rp">${hero}<div class="rcards">${cards}</div><div class="rbtns step" data-k="say" style="--d:5"><div class="rpde"><b>&gt;600 M</b><span>Purchase Driving Events in full FY25/26</span></div><button class="open-rep" data-g="0">${icon('star')} Open the reports</button>${s.link ? `<a class="rlink2 pix" href="${esc(s.link[1])}" target="_blank" rel="noopener">${esc(s.link[0])} ↗</a>` : ''}</div></div>`;
+    const cards = s.rep.cards.map(([ic, h, v, u, g, sub], i) => `<div class="rc step" data-k="succ" style="--d:${i + 1}"><div class="rct"><img class="rci pxi" src="${IC(ic)}" alt=""><span class="rck pix">${esc(h)}</span></div><div class="rcv">${typeof v === "string" ? `<span>${esc(v)}</span>` : `<span class="count" data-to="${v}" data-dp="1">0</span>`}<small>${esc(u)}</small></div>${rch(g)}<span class="rcs">${esc(sub.replace(/-(\d)/, '−$1'))}</span></div>`).join('');
+    return `<div class="rp">${hero}<div class="rcards">${cards}</div><div class="rbtns step" data-k="say" style="--d:5"><button class="open-rep" data-g="0">${icon('star')} Open the reports</button>${s.link ? `<a class="rlink2 pix" href="${esc(s.link[1])}" target="_blank" rel="noopener">${esc(s.link[0])} ↗</a>` : ''}</div></div>`;
   }
   function o2oHtml(s) {
     const facts = `<div class="ofs"><div class="sh plain">How it developed vs PY</div><div class="ofg">${(s.facts || []).map(([ic, n, v, g, tx], i) => `<div class="of step" data-k="succ" style="--d:${i + 2}"><div class="oft"><img class="ofi pxi" src="${IC(ic)}" alt=""><span class="ofn pix">${esc(n)}</span><b class="ofv">${esc(v)}</b>${rch(g)}</div><p class="ofx">${md(tx)}</p></div>`).join('')}</div></div>`;
@@ -3874,6 +3904,10 @@ const Art = (() => {
     const over = () => els().some(el => el.scrollHeight > el.clientHeight + 1 || (el.classList.contains('coll') && el.scrollWidth > el.clientWidth + 1));
     [...panel.children].forEach(c => c.style.zoom = '');
     while (over() && fs > .66) { fs -= .03; panel.style.setProperty('--fs', fs.toFixed(2)); }
+    { let cz = window.LVL_CZ || 1; panel.style.setProperty('--cz', cz);
+      const spill = () => { const r = panel.getBoundingClientRect(), pb = r.bottom - parseFloat(getComputedStyle(panel).paddingBottom) * .5; let w = 0; panel.querySelectorAll('*').forEach(e => { const q = e.getBoundingClientRect(); if (q.height && getComputedStyle(e).position !== 'absolute') w = Math.max(w, q.bottom - pb, q.right - r.right); }); return w > 3; };
+      if (cz > 1) { while (cz > 1 && spill()) { cz = Math.round((cz - .05) * 100) / 100; panel.style.setProperty('--cz', cz); } }
+      if (cz <= 1 && spill()) { while (cz > .8 && spill()) { cz = Math.round((cz - .05) * 100) / 100; panel.style.setProperty('--cz', cz); } } }
     const cs = getComputedStyle(panel), room = panel.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
     const kids = [...panel.children].filter(c => getComputedStyle(c).position !== 'absolute'); const used = kids.reduce((a, c) => a + c.getBoundingClientRect().height, 0) + parseFloat(cs.rowGap || 0) * Math.max(0, kids.length - 1);
     if (used > room + 2) { const z = Math.max(.6, room / used); kids.forEach(c => c.style.zoom = z.toFixed(3)); }
@@ -3919,9 +3953,9 @@ const Art = (() => {
       const ty = a < 10 && b < 10 && Math.abs(b - a) === 1 ? EDGE[Math.min(a, b)] : (a >= 10 || b >= 10 ? 'pixel' : 'iris');
       if (changed) tr = { from: a, to: b, dir: d, t0: performance.now(), dur: ty === 'enter' ? 1900 : 1350, type: ty };
       const newStop = stopCh, ppl = newStop ? stopPeople(s.stop) : scenePeople(b, s.stop); const ty2 = changed ? ty : 'iris';
-      intro.innerHTML = `${newStop && s.stop && CHAP[s.stop] !== CHAP[SLIDES[prev].stop] ? `<div class="i-big pix">0${CHAP[s.stop]}</div>` : ''}<div class="i-k pix">${stopNo(s.stop)}${s.stop ? ' of 0' + NCH : ''}${s.stop === 3 ? ' · Strategic projects' : ''}</div><h2>${esc(newStop ? STOPS[s.stop].name : (ROOMS[b] || SCENES[b].name))}</h2><div class="i-cast${ppl.length > 6 ? ' many' : ''}">${ppl.map(([nm, role, tbc]) => `<div class="i-c"><span class="wa">${avatar(tbc ? '' : nm)}</span><b>${tbc ? esc(role) : esc(nm)}</b><em>${tbc ? 'squad lead' : esc(role)}</em></div>`).join('')}</div>`; if (newStop) confetti();
-      stage.classList.add('intro-on'); clearTimeout(introT); introT = setTimeout(endIntro, ty2 === 'enter' ? 2300 : 1800);
-      wait = ty2 === 'enter' ? 2400 : 1850;
+      intro.innerHTML = `${newStop && s.stop && CHAP[s.stop] !== CHAP[SLIDES[prev].stop] ? `<div class="i-big pix">0${CHAP[s.stop]}</div>` : ''}<div class="i-k pix">${stopNo(s.stop)}${s.stop ? ' of 0' + NCH : ''}${s.stop === 3 ? ' · Strategic projects' : ''}</div><h2>${esc(newStop ? STOPS[s.stop].name : (ROOMS[b] || SCENES[b].name))}</h2><div class="i-cast${ppl.length > 6 ? ' many' : ''}">${ppl.map(([nm, role, tbc]) => `<div class="i-c"><span class="wa">${avatar(tbc ? '' : nm)}</span><b>${tbc ? esc(role) : esc(nm)}</b><em>${tbc ? 'squad lead' : esc(role)}</em></div>`).join('')}</div>`; 
+      stage.classList.add('intro-on'); clearTimeout(introT); introT = setTimeout(endIntro, ty2 === 'enter' ? 1900 : 1400);
+      wait = ty2 === 'enter' ? 2000 : 1450;
     } else { endIntro(); if (changed && !reduce) { const a = ART(SLIDES[prev]), b = ART(s); const ty = a < 10 && b < 10 && Math.abs(b - a) === 1 ? EDGE[Math.min(a, b)] : (a >= 10 || b >= 10 ? 'pixel' : 'iris'); const FT = ['iris', 'blinds', 'x', 'pixel', 'up', 'zoom', 'down']; const fbn = /^fb(\d+)$/.exec(s.id);
       tr = { from: a, to: b, dir: n > prev ? 1 : -1, t0: performance.now(), dur: 900, type: fbn ? FT[(+fbn[1]) % FT.length] : b === 18 ? 'blinds' : (s.stop === 5 && SLIDES[prev].stop !== 5) ? 'down' : (ty === 'enter' ? 'iris' : ty), dur: (s.stop === 5 && SLIDES[prev].stop !== 5) ? 1600 : 900 }; wait = 520; } }
     if (!changed || reduce) { if (prev < 0 || ART(SLIDES[prev]) !== ART(s)) sceneT0 = performance.now(); }
@@ -3929,9 +3963,9 @@ const Art = (() => {
     scene = ART(s);
     const dir = (prev < 0 || n > prev) ? 1 : -1; panel.style.setProperty('--dir', dir);
     const fbm = /^fb(\d+)$/.exec(s.id);
-    const fx = fbm ? ['slide', 'rise', 'flip', 'wipe', 'zoom', 'swing', 'pop'][(+fbm[1]) % 7] : /^(chk2|atpc)$/.test(s.id) ? 'flip' : s.cards ? 'flip' : s.type === 'dash' ? 'zoom' : s.lanes ? 'wipe' : (s.type === 'projects' || s.quests || s.type === 'collect' || s.type === 'matrix') ? 'zoom' : (s.nums && s.nums.length > 2) ? 'rise' : 'slide';
+    const fx = fbm ? ['slide', 'rise'][(+fbm[1]) % 2] : /^(chk2|atpc)$/.test(s.id) ? 'rise' : s.cards ? 'rise' : s.type === 'dash' ? 'zoom' : s.lanes ? 'wipe' : (s.type === 'projects' || s.quests || s.type === 'collect' || s.type === 'matrix') ? 'zoom' : (s.nums && s.nums.length > 2) ? 'rise' : 'slide';
     const sqChanged = !changed && prev >= 0 && SQ(SLIDES[prev]) !== SQ(s) && s.type !== 'cover' && s.type !== 'close';
-    const put = () => { panel.classList.remove('fx-slide', 'fx-rise', 'fx-flip', 'fx-wipe', 'fx-zoom', 'fx-swing', 'fx-pop'); void panel.offsetWidth; panel.classList.add('fx-' + fx); panel.innerHTML = render(s); panel.classList.toggle('cover', s.type === 'cover' || s.type === 'close'); panel.classList.remove('focusing', 'shown'); fit(); panel.classList.toggle('ai-wide', s.id === 'ai'); panel.classList.remove('out'); };
+    const put = () => { panel.classList.remove('fx-slide', 'fx-rise', 'fx-flip', 'fx-wipe', 'fx-zoom', 'fx-swing', 'fx-pop'); void panel.offsetWidth; panel.classList.add('fx-' + fx); panel.innerHTML = render(s); panel.classList.toggle('cover', s.type === 'cover' || s.type === 'close'); panel.classList.remove('focusing', 'shown'); fit(); panel.classList.toggle('ai-wide', s.id === 'ai'); panel.classList.remove('out'); addPreview(); warm(n + 1); warm(n - 1); panel.querySelectorAll('img').forEach(im => im.complete || im.addEventListener('load', () => fit(), { once: true })); };
     clearTimeout(swapT);
     if (prev < 0 || reduce) put(); else { panel.classList.add('out'); swapT = setTimeout(put, 200); }
     reveal(reduce ? 0 : (prev < 0 ? 300 : wait));
@@ -3944,11 +3978,24 @@ const Art = (() => {
     $('#play').hidden = !Art.meta(ART(s)).sprite;
     hud.querySelectorAll('.node').forEach(b => { const c = +b.dataset.ch; b.classList.toggle('on', c === CHAP[s.stop]); b.classList.toggle('done', c < CHAP[s.stop]); });
     try { history.replaceState(null, '', '#' + s.id); } catch (e) { }
-    { const L = SLIDES.filter(x => x.ftb); if (L.length && s === L[L.length - 1] && prev >= 0 && SLIDES[prev].ftb) setTimeout(() => { makeRain(true); secret('fixed'); }, 1600); }
+    { const L = SLIDES.filter(x => x.ftb); if (L.length && s === L[L.length - 1] && prev >= 0 && SLIDES[prev].ftb) 0; }
     if (prev >= 0 && s.ftb && SLIDES[prev].ftb && (s.who[0] || [])[0] !== (SLIDES[prev].who[0] || [])[0]) setTimeout(() => secret('pass'), 1300);
     if (reduce) paint(0);
     lastHit && setTimeout(markHits, (reduce ? 0 : wait) + 700);
     clearTimeout(popT); if (false) popT = setTimeout(() => { if (SLIDES[cur] === s && lb.hidden && !stage.classList.contains('peek') && !stage.classList.contains('intro-on')) { gallery = s.shots.slice(); showLb(0); } }, wait + 2800);
+  }
+  function addPreview() {
+    panel.querySelectorAll('[data-g], [data-src]').forEach(el => {
+      if (el.matches('.open-rep, .vso') || el.closest('.vso, .cmz') || !el.querySelector('img') || el.querySelector('.ctp')) return;
+      if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
+      el.insertAdjacentHTML('beforeend', '<span class="ctp" aria-hidden="true">Click to preview</span>');
+    });
+  }
+  const warmed = new Set();
+  function warm(n) {
+    const x = SLIDES[n]; if (!x || warmed.has(n)) return; warmed.add(n);
+    const keys = new Set(); const walk = v => { if (typeof v === 'string') { if (window.ASSETS[v]) keys.add(v); } else if (Array.isArray(v)) v.forEach(walk); else if (v && typeof v === 'object') Object.values(v).forEach(walk); };
+    walk(x); keys.forEach(k => { const im = new Image(); im.src = IM(k); im.decode && im.decode().catch(() => { }); });
   }
   function next() {
     if (stage.classList.contains('intro-on')) { endIntro(); reveal(0); return; }
@@ -4052,6 +4099,47 @@ const Art = (() => {
   ov.addEventListener('click', e => { const r = e.target.closest('.ovr'); if (r) { ovSec(r.dataset.sec); return; } const b = e.target.closest('.ovt,.ovc'); if (b) { closeOv(); go(+b.dataset.i); } else if (e.target === ov) closeOv(); });
   const ovb = document.createElement('button'); ovb.className = 'wide'; ovb.textContent = 'Overview'; ovb.title = 'All slides at a glance (O)'; $('.nav').insertBefore(ovb, $('#peek')); ovb.onclick = () => ov.hidden ? openOv() : closeOv();
 
+  /* ---------- display settings: background dim, slide size, wide slides, fullscreen ---------- */
+  const DISP = { dim: 0, size: 1, wide: false };
+  try { Object.assign(DISP, JSON.parse(localStorage.getItem('lvl-disp') || '{}')); } catch (e) { }
+  const dispBtn = document.createElement('button'); dispBtn.className = 'wide'; dispBtn.id = 'dispb'; dispBtn.textContent = 'Display'; dispBtn.title = 'Background, slide size, wide slides, fullscreen'; dispBtn.setAttribute('aria-expanded', 'false');
+  $('.nav').insertBefore(dispBtn, $('#peek'));
+  const dp = document.createElement('div'); dp.className = 'dpop'; dp.hidden = true; stage.appendChild(dp);
+  dp.innerHTML = `<h3 class="pix">Display</h3>
+    <label class="drow"><span>Background</span><input type="range" id="d-dim" min="0" max="75" step="5" aria-label="Dim the background scene"><output id="d-dimv"></output></label>
+    <div class="dhint">Drag right to dim the scene behind the slides · key D</div>
+    <div class="drow"><span>Slide size</span><div class="dseg"><button data-sz="-1" aria-label="Smaller">A−</button><output id="d-szv"></output><button data-sz="1" aria-label="Bigger">A+</button></div></div>
+    <div class="dhint">Keys − and +</div>
+    <div class="drow"><span>Layout</span><div class="dseg"><button data-wide="0">Standard</button><button data-wide="1">Wide slides</button></div></div>
+    <div class="dhint">Wide slides hides the scene column · key E</div>
+    <div class="drow"><span>Screen</span><div class="dseg"><button id="d-fs">Fullscreen</button><button id="d-reset">Reset</button></div></div>`;
+  function applyDisp(save = true) {
+    DISP.dim = Math.max(0, Math.min(75, +DISP.dim || 0)); DISP.size = Math.max(.8, Math.min(1.3, Math.round((+DISP.size || 1) * 10) / 10));
+    stage.style.setProperty('--sdim', (1 - DISP.dim / 100).toFixed(2)); stage.style.setProperty('--ssat', (1 - DISP.dim / 160).toFixed(2));
+    window.LVL_CZ = DISP.size; stage.classList.toggle('wide-on', !!DISP.wide); stage.classList.toggle('dimmed', DISP.dim > 0);
+    $('#d-dim').value = DISP.dim; $('#d-dimv').textContent = DISP.dim ? '−' + DISP.dim + '%' : 'Normal'; $('#d-szv').textContent = Math.round(DISP.size * 100) + '%';
+    dp.querySelectorAll('[data-wide]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.wide === +!!DISP.wide)));
+    $('#d-fs').textContent = document.fullscreenElement ? 'Exit fullscreen' : 'Fullscreen';
+    if (save) try { localStorage.setItem('lvl-disp', JSON.stringify(DISP)); } catch (e) { }
+    requestAnimationFrame(() => { fit(); });
+  }
+  const toggleFs = () => { try { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); } catch (e) { } };
+  document.addEventListener('fullscreenchange', () => applyDisp(false));
+  dp.addEventListener('input', e => { if (e.target.id === 'd-dim') { DISP.dim = +e.target.value; applyDisp(); } });
+  dp.addEventListener('click', e => { const z = e.target.closest('[data-sz]'), w = e.target.closest('[data-wide]');
+    if (z) { DISP.size += +z.dataset.sz * .1; applyDisp(); } else if (w) { DISP.wide = w.dataset.wide === '1'; applyDisp(); }
+    else if (e.target.id === 'd-fs') toggleFs(); else if (e.target.id === 'd-reset') { DISP.dim = 0; DISP.size = 1; DISP.wide = false; applyDisp(); } e.stopPropagation(); });
+  const openDp = v => { dp.hidden = !v; dispBtn.setAttribute('aria-expanded', String(v)); dispBtn.setAttribute('aria-pressed', String(v)); };
+  dispBtn.onclick = e => { e.stopPropagation(); openDp(dp.hidden); };
+  document.addEventListener('pointerdown', e => { if (!dp.hidden && !e.target.closest('.dpop, #dispb')) openDp(false); });
+  applyDisp(false);
+
+  /* ---------- progress bar: hover shows the slide, click jumps ---------- */
+  const bhit = document.createElement('div'); bhit.className = 'bhit'; bhit.innerHTML = '<span class="btip"></span>'; stage.appendChild(bhit);
+  const bIdx = e => { const r = bhit.getBoundingClientRect(); return Math.max(0, Math.min(N - 1, Math.floor((e.clientX - r.left) / r.width * N))); };
+  bhit.addEventListener('pointermove', e => { const i = bIdx(e), x = SLIDES[i], t = $('.btip', bhit), r = bhit.getBoundingClientRect(); t.textContent = `${i + 1} · ${SQ(x) || headOf(x)[0] || 'Agenda'}${x.period && x.period !== SQ(x) ? ' · ' + x.period : ''}`; t.style.left = Math.max(80, Math.min(r.width - 80, e.clientX - r.left)) + 'px'; });
+  bhit.addEventListener('click', e => go(bIdx(e)));
+
   /* ---------- search (/) ---------- */
   const TXT = SLIDES.map(s => { const o = []; const w = x => { if (typeof x === 'string') o.push(x.split(' ¦ ')[0]); else if (Array.isArray(x)) x.forEach(w); else if (x && typeof x === 'object') Object.entries(x).forEach(([k, v]) => { if (!['id', 'icon', 'k', 'img', 'img2', 'go', 'type', 'view', 'shots', 'a', 'b', 'link'].includes(k)) w(v); }); }; w(s); return o.join(' · '); });
   const sr = document.createElement('div'); sr.className = 'sr'; sr.hidden = true; sr.innerHTML = '<div class="srb"><input type="search" placeholder="Search every slide… e.g. AtP, 65k, Juliet" aria-label="Search slides"><ul></ul><p class="pix">↑ ↓ choose · Enter jump · Esc close</p></div>'; stage.appendChild(sr);
@@ -4118,7 +4206,7 @@ const Art = (() => {
 
   /* ---------- single-letter shortcuts wait a beat, so typed secret words do not toggle things ---------- */
   let pendK = null, pendT = 0, lastLetter = 0;
-  const SHORT = { f: () => toggleFlags(), v: () => togglePeek(), s: () => toggleStepping(), g: () => startGame(), o: () => ov.hidden ? openOv() : closeOv(), t: () => toggleTimer(), l: () => toggleLaser(), p: () => cast.hidden ? openCast() : closeCast(), w: () => cast.hidden ? openCast() : closeCast() };
+  const SHORT = { d: () => { DISP.dim = DISP.dim >= 60 ? 0 : DISP.dim >= 30 ? 60 : 30; applyDisp(); }, e: () => { DISP.wide = !DISP.wide; applyDisp(); }, f: () => toggleFlags(), v: () => togglePeek(), s: () => toggleStepping(), g: () => startGame(), o: () => ov.hidden ? openOv() : closeOv(), t: () => toggleTimer(), l: () => toggleLaser(), p: () => cast.hidden ? openCast() : closeCast(), w: () => cast.hidden ? openCast() : closeCast() };
   function queueShortcut(k) { const now = Date.now(), burst = now - lastLetter < 330; lastLetter = now; clearTimeout(pendT); if (burst) { pendK = null; return; } pendK = k; pendT = setTimeout(() => { if (pendK && SHORT[pendK]) SHORT[pendK](); pendK = null; }, 330); }
 
   /* ---------- input ---------- */
@@ -4129,6 +4217,8 @@ const Art = (() => {
     if (!blk.hidden) { blk.hidden = true; e.preventDefault(); return; }
     if (!ov.hidden) { if (k === 'Escape' || k === 'o' || k === 'O') closeOv(); e.preventDefault(); return; }
     if (k === '/') { e.preventDefault(); openSearch(); return; }
+    if (k === 'Escape' && !dp.hidden) { openDp(false); return; }
+    if ((k === '+' || k === '=' || k === '-' || k === '_') && !e.ctrlKey && !e.metaKey) { DISP.size += (k === '-' || k === '_') ? -.1 : .1; applyDisp(); e.preventDefault(); return; }
     if (k === '.') { blk.hidden = false; return; }
     if (!lb.hidden) { if (k === 'ArrowRight') { if (gallery.length < 2) lb.hidden = true; else showLb(gi + 1); } else if (k === 'ArrowLeft') { if (gallery.length < 2) lb.hidden = true; else showLb(gi - 1); } else if (['Escape', ' ', 'Enter'].includes(k)) lb.hidden = true; e.preventDefault(); return; }
     if (game) { if (k === 'ArrowLeft') game.key = -1; else if (k === 'ArrowRight') game.key = 1; else if (k === 'Escape') endGame(); else if (k === 'g' || k === 'G') { endGame(); startGame(); } e.preventDefault(); return; }
