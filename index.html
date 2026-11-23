@@ -1616,6 +1616,21 @@ mark.hl { background: linear-gradient(transparent 55%, rgba(255, 184, 28, .55) 5
 .panel:has(> .lanes) > .lanes { padding-top: calc(var(--u) * .6) !important; padding-bottom: calc(var(--u) * .6) !important; }
 .panel:has(> .lanes) > .body { margin: 0 !important; }
 .lanes .lc { font-size: calc(var(--u) * .8) !important; } .lanes .lk span { font-size: calc(var(--u) * .9) !important; } .lanes .bar2 span { font-size: calc(var(--u) * .95 * var(--fs)) !important; } .lanes .bar2 { min-height: calc(var(--u) * 2.1); }
+
+.bst { background: #E1F1FC; padding: 0 0 calc(var(--u) * 1); gap: calc(var(--u) * 1) !important; }
+.bsh { align-self: flex-start; width: 48%; background: var(--navy); color: var(--gold); font-weight: 900; font-size: calc(var(--u) * 1.6); padding: calc(var(--u) * .45) calc(var(--u) * 1.2); }
+.bsg { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.25fr) minmax(0, .5fr); gap: calc(var(--u) * 1.6); padding: 0 calc(var(--u) * 1.2); }
+.bsc { min-height: 0; display: flex; flex-direction: column; gap: calc(var(--u) * .7); }
+.bsc .bimg { flex: 1; min-height: 0; background: #fff; } .bsc .bimg img { width: 100%; height: 100%; object-fit: contain; }
+.bsl { align-self: flex-start; font-weight: 900; font-size: calc(var(--u) * 1.05); padding: .3em .7em; text-transform: uppercase; }
+.bsl.b { background: #fff; color: var(--navy); box-shadow: inset 0 0 0 calc(var(--u) * .12) #6FA8DC; } .bsl.a { background: var(--gold); color: var(--navy); } .bsl.ghost { visibility: hidden; }
+.bst .dcl { padding: 0 calc(var(--u) * 1.2); margin: 0 0 0 calc(100% * 1.2 / 2.95); }
+.panel[data-id="cat2"] > .body { flex: 1 1 auto !important; display: flex; min-height: 0; }
+.panel[data-id="cat2"] .cols { flex: 1; align-items: stretch; }
+.panel[data-id="cat2"] .sec { display: flex; flex-direction: column; padding: calc(var(--u) * 1.6) calc(var(--u) * 1.8) !important; }
+.panel[data-id="cat2"] .sec > ul { flex: 1; display: flex; flex-direction: column; justify-content: space-evenly; }
+.panel[data-id="cat2"] .sec li { font-size: calc(var(--u) * 1.25) !important; }
+.panel[data-id="cat2"] .sec li b, .panel[data-id="cat2"] .sec li strong { font-size: calc(var(--u) * 1.4) !important; }
 </style>
 </head>
 <body>
@@ -1809,7 +1824,7 @@ const SLIDES = [
         { t: "Juliet - NL", s: "Support NL to open up their new horeca focused metro brand" }] }] },
 
   { id: "cat1", icon: "catalogue", scene: 2, squad: "Digital Catalogues", period: "FY25/26 milestones", src: "63", who: [lead("Digital Catalogues", "Jordi")],
-    shots: [["catdyn", "Dynamic Catalogues · regional catalogues in DE"]], secs: [{ k: "succ", h: "Customer experience", items: [{ t: "Dynamic Catalogues", s: "+9 in DE with a scalable and semi-automated process." }, { t: "Add to cart", s: "FSD customers can add products to cart and stock is based on AtP in DE, IT, FR and ES", sub: ["BG, HR, HU, MD, RO and NL – Nov 26", "PL, PT, RS, TR, UA and CZ – Jan 27", "AT, SK, HR – Feb 27"] }] }] },
+    shots: [["catdyn", "Dynamic Catalogues · regional catalogues in DE"]], secs: [{ k: "succ", h: "Customer experience", items: [{ t: "Dynamic Catalogues", s: "+9 in DE with a scalable and semi-automated process." }, { t: "Add to cart", s: "FSD customers can add products to cart and stock is based on AtP in DE, IT, FR and ES" }] }] },
 
   { id: "cat2", icon: "catalogue", scene: 2, squad: "Digital Catalogues", period: "FY26/27 next", src: "88", who: [lead("Digital Catalogues", "Jordi")],
     secs: [
@@ -2391,7 +2406,7 @@ const STOPS = [
   set("ccov3", { secs: [{ k: "next", h: "Advanced Capabilities", items: [{ t: "Alternative Store Availability", s: "HBR1" }, { t: "Recently Bought", s: "Enable the customers to see which articles they recently bought in the store · HBR1" }, { t: "Define a homepage based on C&C customer needs", s: "Discovery HBR1 – implementation HBR2" }, { t: "Personal lists as instore shopping list", s: "Discovery HBR1 – implementation HBR2" }] },
     { k: "proj", h: "Cross-Team Initiatives - Discovery", items: [{ t: "Future Promotion", s: "Give the customers the possibility to view future promotion prices" }, { t: "Leading Articles concept for CCOV", s: "Show Promotion/BMPL also for Leading Articles" }] }] });
   ["we1", "we2", "chk4", "chk2", "ai", "s4"].forEach(id => by[id].pp = id); by.chk4.period = "FY26/27 next";
-  by.catba.pp = "ba"; by.catba.ba = ["PDP", ["pdpB", "PDP · Before"], ["pdpA", "PDP · After · with «Add to Cart»"], ["pdpM", "PDP · After · mobile"], "Before", "After · with «Add to Cart»"];
+  by.catba.pp = "bastatic";  by.catba.ba = ["PDP", ["pdpB", "PDP · Before"], ["pdpA", "PDP · After · with «Add to Cart»"], ["pdpM", "PDP · After · mobile"], "Before", "After · with «Add to Cart»"];
   by.catview.pp = "ba"; by.catview.ba = ["Catalogue View", ["cvB", "Catalogue View · In FY26"], ["cvA", "Catalogue View · Coming soon in FY27"], ["cvM", "Catalogue View · Coming soon in FY27 · mobile"], "In FY26", "Coming soon in FY27"];
   by.comp1.view = { ...by.comp1.view, imgs: [["not1", "Notification Center"], ["not2", "Notification Center · Messages"], ["not3", "Notification Center · Order details"]] };
   by.css1.shots = []; by.om1.pp = "om1"; by.cw1.pp = "cw1"; by.ccov1.subX = "FY25/26 milestones"; by.css1.pp = 'big3';
@@ -3908,6 +3923,11 @@ const Art = (() => {
   const nbox = (cls, hIcon, h, items) => `<section class="nb ${cls} step" data-k="${cls === 'dk' ? 'proj' : 'basics'}" style="--d:${cls === 'dk' ? 1 : 0}"><div class="nbh"><img class="pxi" src="${IC(hIcon)}" alt=""><b>${esc(h)}</b></div><ol>${items.map(([t, d], i) => `<li><span class="nn">${i + 1}</span><div><b>${md(t)}</b>${Array.isArray(d) ? `<ul>${d.map(x => `<li>${md(x)}</li>`).join('')}</ul>` : d ? `<p>${md(d)}</p>` : ''}</div></li>`).join('')}</ol></section>`;
   const TLX = x => ((x - 95) / 1405 * 100).toFixed(2) + '%';
   const PP = {
+    bastatic: s => { const [h, a, b, m, la, lb] = s.ba; return `<div class="xp bst"><div class="bsh">${esc(h)}</div><div class="bsg">
+      <div class="bsc step" data-k="succ" style="--d:0"><span class="bsl b">${esc(la)}</span>${pimg(a[0], a[1])}</div>
+      <div class="bsc step" data-k="succ" style="--d:1"><span class="bsl a">${esc(lb)}</span>${pimg(b[0], b[1])}</div>
+      <div class="bsc m step" data-k="succ" style="--d:2"><span class="bsl a ghost">&nbsp;</span>${pimg(m[0], m[1])}</div></div>
+      <p class="dcl"><i></i>what changed</p></div>`; },
 
     om1: s => `<div class="xp two omx">
       <section class="omp step" data-k="succ" style="--d:0"><span class="omc">UI improvements</span>
@@ -4061,7 +4081,7 @@ const Art = (() => {
       const spill = () => { const r = panel.getBoundingClientRect(), pb = r.bottom - parseFloat(getComputedStyle(panel).paddingBottom) * .5; let w = 0; panel.querySelectorAll('*').forEach(e => { const q = e.getBoundingClientRect(); if (q.height && getComputedStyle(e).position !== 'absolute') w = Math.max(w, q.bottom - pb, q.right - r.right); }); return w > 3; };
       if (cz > 1) { while (cz > 1 && spill()) { cz = Math.round((cz - .05) * 100) / 100; panel.style.setProperty('--cz', cz); } }
       if (cz <= 1 && spill()) { while (cz > .74 && spill()) { cz = Math.round((cz - .05) * 100) / 100; panel.style.setProperty('--cz', cz); } }
-      else if (!spill() && !panel.matches('.cover')) { const hasImg = panel.querySelector('img:not(.pxi):not(.ico)'), cap = (window.LVL_CZ || 1) * (hasImg ? 1.05 : 1.2);
+      else if (!spill() && !panel.matches('.cover')) { const hasImg = panel.querySelector('img:not(.pxi):not(.ico)'), cap = (window.LVL_CZ || 1) * (+panel.dataset.grow || (hasImg ? 1.05 : 1.2));
         const tight = () => { const r = panel.getBoundingClientRect(), pb = r.bottom - parseFloat(getComputedStyle(panel).paddingBottom) - 6; let w = 0; panel.querySelectorAll('*').forEach(e => { const q = e.getBoundingClientRect(); if (q.height && getComputedStyle(e).position !== 'absolute') w = Math.max(w, q.bottom - pb, q.right - r.right + 6); }); return w > 0; };
         while (cz < cap) { const nz = Math.round((cz + .05) * 100) / 100; panel.style.setProperty('--cz', nz); if (tight() || over()) { panel.style.setProperty('--cz', cz); break; } cz = nz; } } }
     const cs = getComputedStyle(panel), room = panel.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
@@ -4121,7 +4141,7 @@ const Art = (() => {
     const fbm = /^fb(\d+)$/.exec(s.id);
     const fx = fbm ? ['slide', 'rise'][(+fbm[1]) % 2] : /^(chk2|atpc)$/.test(s.id) ? 'rise' : s.cards ? 'rise' : s.type === 'dash' ? 'zoom' : s.lanes ? 'wipe' : (s.type === 'projects' || s.quests || s.type === 'collect' || s.type === 'matrix') ? 'zoom' : (s.nums && s.nums.length > 2) ? 'rise' : 'slide';
     const sqChanged = !changed && prev >= 0 && SQ(SLIDES[prev]) !== SQ(s) && s.type !== 'cover' && s.type !== 'close';
-    const put = () => { panel.classList.remove('fx-slide', 'fx-rise', 'fx-flip', 'fx-wipe', 'fx-zoom', 'fx-swing', 'fx-pop'); void panel.offsetWidth; panel.classList.add('fx-' + fx); panel.innerHTML = render(s); panel.classList.toggle('cover', s.type === 'cover' || s.type === 'close'); panel.classList.remove('focusing', 'shown'); fit(); panel.classList.toggle('ai-wide', s.id === 'ai'); panel.dataset.id = s.id; panel.classList.remove('out'); addPreview(); warm(n + 1); warm(n - 1); clearTimeout(window.__rf); clearTimeout(window.__rf2); window.__rf = setTimeout(() => fit(), 900); window.__rf2 = setTimeout(() => fit(), 2200); panel.querySelectorAll('img').forEach(im => im.complete || im.addEventListener('load', () => fit(), { once: true })); };
+    const put = () => { panel.classList.remove('fx-slide', 'fx-rise', 'fx-flip', 'fx-wipe', 'fx-zoom', 'fx-swing', 'fx-pop'); void panel.offsetWidth; panel.classList.add('fx-' + fx); panel.innerHTML = render(s); panel.classList.toggle('cover', s.type === 'cover' || s.type === 'close'); panel.classList.remove('focusing', 'shown'); fit(); panel.classList.toggle('ai-wide', s.id === 'ai'); panel.dataset.id = s.id; if (s.grow) panel.dataset.grow = s.grow; else delete panel.dataset.grow; panel.classList.remove('out'); addPreview(); warm(n + 1); warm(n - 1); clearTimeout(window.__rf); clearTimeout(window.__rf2); window.__rf = setTimeout(() => fit(), 900); window.__rf2 = setTimeout(() => fit(), 2200); panel.querySelectorAll('img').forEach(im => im.complete || im.addEventListener('load', () => fit(), { once: true })); };
     clearTimeout(swapT);
     if (prev < 0 || reduce) put(); else { panel.classList.add('out'); swapT = setTimeout(put, 200); }
     reveal(reduce ? 0 : (prev < 0 ? 300 : wait));
