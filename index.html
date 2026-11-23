@@ -1573,6 +1573,21 @@ mark.hl { background: linear-gradient(transparent 55%, rgba(255, 184, 28, .55) 5
 .cwk b { font-size: calc(var(--u) * 2.6); white-space: nowrap; }
 .cwg { grid-template-columns: minmax(0, .9fr) minmax(0, 1.3fr); }
 .panel[data-id="dash2"] .dnut .dnw { width: calc(var(--u) * 11); } .panel[data-id="dash2"] .dc b { font-size: calc(var(--u) * 1.55); }
+
+/* ---- timers ---- */
+.tmr { height: 100%; box-sizing: border-box; display: flex; align-items: center; gap: calc(var(--u) * .45); background: #fff; border: calc(var(--u) * .18) solid var(--navy); box-shadow: calc(var(--u) * .25) calc(var(--u) * .25) 0 rgba(0, 31, 69, .3); padding: 0 calc(var(--u) * .45); font-family: Manrope, sans-serif; color: var(--navy); }
+.tmr, .tmr[hidden] { display: none !important; }
+.stage.tm-show .tmr:not([hidden]) { display: flex !important; }
+.tmr button { font: 900 calc(var(--u) * .7) Manrope, sans-serif; color: var(--navy); background: var(--gold); border: 0; width: calc(var(--u) * 1.8); height: calc(var(--u) * 1.8); cursor: pointer; display: grid; place-items: center; flex: none; }
+.tmr .tm-rs { background: #EEF4FB; font-size: calc(var(--u) * .9); }
+.tmr.on .tm-go { background: var(--navy); color: var(--gold2); }
+.tm-b { display: flex; flex-direction: column; gap: calc(var(--u) * .1); width: calc(var(--u) * 9.5); }
+.tm-n { font-size: calc(var(--u) * .58); font-weight: 800; color: #1F5AA8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tm-t { line-height: 1; white-space: nowrap; } .tm-v { font-size: calc(var(--u) * 1.05); font-weight: 900; font-variant-numeric: tabular-nums; } .tm-of { font-style: normal; font-size: calc(var(--u) * .62); font-weight: 700; color: var(--ink3); }
+.tm-bar { height: calc(var(--u) * .2); background: #E2EAF4; } .tm-bar i { display: block; height: 100%; width: 0; background: #12A06A; transition: width .5s linear; }
+.tm-tot { display: none; }
+.tmr.warn .tm-bar i { background: var(--gold); }
+.tmr.over { border-color: #E2231A; } .tmr.over .tm-v { color: #E2231A; } .tmr.over .tm-bar i { background: #E2231A; }
 </style>
 </head>
 <body>
@@ -3596,7 +3611,7 @@ const Art = (() => {
   ['pointermove', 'keydown', 'touchstart', 'wheel'].forEach(ev => addEventListener(ev, idleReset, { passive: true })); idleReset();
   /* ---------- help overlay ---------- */
   const help = document.createElement('div'); help.className = 'help'; help.hidden = true;
-  help.innerHTML = '<div class="hbox"><h2 class="pix">Controls</h2><div class="hcols"><ul><li><b>← →</b> previous / next part or slide</li><li><b>Shift + ← →</b> previous / next topic</li><li><b>1–7</b> spotlight a section type</li><li><b>P</b> who presents what</li><li><b>O</b> overview of every slide</li><li><b>/</b> search all slides</li><li><b>D</b> dim background · <b>− +</b> slide size · <b>E</b> wide slides</li><li><b>Home / End</b> first / last slide</li></ul><ul><li><b>S</b> spotlight on / off</li><li><b>F</b> show / hide items to confirm</li><li><b>T</b> 90-minute pacing timer</li><li><b>L</b> laser pointer</li><li><b>.</b> blackout screen</li><li><b>V</b> view scene · <b>G</b> mini-game</li></ul></div><p>Psst: some words and key combinations do things. Try typing a few, or searching for them.</p><button class="pix">Close</button></div>';
+  help.innerHTML = '<div class="hbox"><h2 class="pix">Controls</h2><div class="hcols"><ul><li><b>← →</b> previous / next part or slide</li><li><b>Shift + ← →</b> previous / next topic</li><li><b>1–7</b> spotlight a section type</li><li><b>P</b> who presents what</li><li><b>O</b> overview of every slide</li><li><b>/</b> search all slides</li><li><b>T</b> show the speaker timer, then start / pause it</li><li><b>D</b> dim background · <b>− +</b> slide size · <b>E</b> wide slides</li><li><b>Home / End</b> first / last slide</li></ul><ul><li><b>S</b> spotlight on / off</li><li><b>F</b> show / hide items to confirm</li><li><b>T</b> 90-minute pacing timer</li><li><b>L</b> laser pointer</li><li><b>.</b> blackout screen</li><li><b>V</b> view scene · <b>G</b> mini-game</li></ul></div><p>Psst: some words and key combinations do things. Try typing a few, or searching for them.</p><button class="pix">Close</button></div>';
   stage.appendChild(help); help.addEventListener('click', () => { help.hidden = true; });
 
   /* ---------- optional mini-game: fill the trolley ---------- */
@@ -4080,6 +4095,7 @@ const Art = (() => {
     reveal(reduce ? 0 : (prev < 0 ? 300 : wait));
     stage.classList.toggle('is-cover', s.type === 'cover');
     { const nx = nextPresenter(n); plate.innerHTML = `<div class="pl-k pix"><i class="live"></i>${s.stop ? stopNo(s.stop) + ' · ' + esc(STOPS[s.stop].name) + ' · ' : ''}Presenting now</div><div class="pl-p">${(s.who || []).map(person).join('')}</div>`; }
+    window.tmSeg && window.tmSeg(s);
     $('#lv').textContent = s.stop === 0 ? 'START' : `STOP 0${CHAP[s.stop]}/0${NCH}`;
     $('#lvn').textContent = CHN(s.stop);
     $('#cnt').textContent = `${n + 1}/${N}`;
@@ -4209,7 +4225,7 @@ const Art = (() => {
   const ovb = document.createElement('button'); ovb.className = 'wide'; ovb.textContent = 'Overview'; ovb.title = 'All slides at a glance (O)'; $('.nav').insertBefore(ovb, $('#peek')); ovb.onclick = () => ov.hidden ? openOv() : closeOv();
 
   /* ---------- display settings: background dim, slide size, wide slides, fullscreen ---------- */
-  const DISP = { dim: 0, size: 1, wide: false };
+  const DISP = { dim: 0, size: 1, wide: false, timer: false };
   try { Object.assign(DISP, JSON.parse(localStorage.getItem('lvl-disp') || '{}')); } catch (e) { }
   const dispBtn = document.createElement('button'); dispBtn.className = 'wide'; dispBtn.id = 'dispb'; dispBtn.textContent = 'Display'; dispBtn.title = 'Background, slide size, wide slides, fullscreen'; dispBtn.setAttribute('aria-expanded', 'false');
   $('.nav').insertBefore(dispBtn, $('#peek'));
@@ -4221,6 +4237,8 @@ const Art = (() => {
     <div class="dhint">Keys − and +</div>
     <div class="drow"><span>Layout</span><div class="dseg"><button data-wide="0">Standard</button><button data-wide="1">Wide slides</button></div></div>
     <div class="dhint">Wide slides hides the scene column · key E</div>
+    <div class="drow"><span>Speaker timer</span><div class="dseg"><button data-tmr="1">Show</button><button data-tmr="0">Hide</button></div></div>
+    <div class="dhint">Preset minutes per speaker · start / pause with T</div>
     <div class="drow"><span>Screen</span><div class="dseg"><button id="d-fs">Fullscreen</button><button id="d-reset">Reset</button></div></div>`;
   function applyDisp(save = true) {
     DISP.dim = Math.max(0, Math.min(75, +DISP.dim || 0)); DISP.size = Math.max(.8, Math.min(1.3, Math.round((+DISP.size || 1) * 10) / 10));
@@ -4228,6 +4246,7 @@ const Art = (() => {
     window.LVL_CZ = DISP.size; stage.classList.toggle('wide-on', !!DISP.wide); stage.classList.toggle('dimmed', DISP.dim > 0);
     $('#d-dim').value = DISP.dim; $('#d-dimv').textContent = DISP.dim ? '−' + DISP.dim + '%' : 'Normal'; $('#d-szv').textContent = Math.round(DISP.size * 100) + '%';
     dp.querySelectorAll('[data-wide]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.wide === +!!DISP.wide)));
+    dp.querySelectorAll('[data-tmr]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.tmr === +!!DISP.timer))); stage.classList.toggle('tm-show', !!DISP.timer);
     $('#d-fs').textContent = document.fullscreenElement ? 'Exit fullscreen' : 'Fullscreen';
     if (save) try { localStorage.setItem('lvl-disp', JSON.stringify(DISP)); } catch (e) { }
     requestAnimationFrame(() => { fit(); });
@@ -4235,13 +4254,63 @@ const Art = (() => {
   const toggleFs = () => { try { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); } catch (e) { } };
   document.addEventListener('fullscreenchange', () => applyDisp(false));
   dp.addEventListener('input', e => { if (e.target.id === 'd-dim') { DISP.dim = +e.target.value; applyDisp(); } });
-  dp.addEventListener('click', e => { const z = e.target.closest('[data-sz]'), w = e.target.closest('[data-wide]');
+  dp.addEventListener('click', e => { const z = e.target.closest('[data-sz]'), w = e.target.closest('[data-wide]'), tq = e.target.closest('[data-tmr]'); if (tq) { DISP.timer = tq.dataset.tmr === '1'; applyDisp(); e.stopPropagation(); return; }
     if (z) { DISP.size += +z.dataset.sz * .1; applyDisp(); } else if (w) { DISP.wide = w.dataset.wide === '1'; applyDisp(); }
-    else if (e.target.id === 'd-fs') toggleFs(); else if (e.target.id === 'd-reset') { DISP.dim = 0; DISP.size = 1; DISP.wide = false; applyDisp(); } e.stopPropagation(); });
+    else if (e.target.id === 'd-fs') toggleFs(); else if (e.target.id === 'd-reset') { DISP.dim = 0; DISP.size = 1; DISP.wide = false; DISP.timer = false; applyDisp(); } e.stopPropagation(); });
   const openDp = v => { dp.hidden = !v; dispBtn.setAttribute('aria-expanded', String(v)); dispBtn.setAttribute('aria-pressed', String(v)); };
   dispBtn.onclick = e => { e.stopPropagation(); openDp(dp.hidden); };
   document.addEventListener('pointerdown', e => { if (!dp.hidden && !e.target.closest('.dpop, #dispb')) openDp(false); });
   applyDisp(false);
+
+
+  /* ---------- presenter timers (top right, manual start) ---------- */
+  (() => {
+    const SEG = [
+      ['intro', 'Tareq · Intro', 2, 'cover quote'], ['rep', 'Cosmin · O2O + KPIs', 4, 'report o2o'], ['mc', 'Tim · M.Companion', 3, 'dash1 dash2'],
+      ['hats', 'Tareq · Hats', 1, 'hats'], ['spi', 'Tareq · Strategic projects', 1, 'sp'], ['po', 'Mikhail · Punchout', 2, 'pc pc2'], ['atp', 'Mikhail · AtP', 2, 'chk2 atpc'],
+      ['b2', 'Derya · B2B2C', 2, 'b2'], ['aioc', 'Derya · AI Order Capture', 2, 'ai ai2'], ['aia', 'Annette · AI Agent', 2, 'aip1 aip2'], ['bac', 'Christoph · BaC', 3, 'bac'],
+      ['harm', 'Cosmin · Harmonization', 3, 'h1 h2 h3 h4 cwh'], ['jul', 'Stefan · Juliet', 2, 'jul'], ['wsm', 'Bastian · Wholesale Media', 2, 'wsm1 wsm2'],
+      ['ftba', 'Annkathrin · Fixing the basics', 6, 'fbmap fb1 fb2 fb3 fb4 fb5 fb6 fb7 fb8'], ['ftbc', 'Chloe · Fixing the basics', 6, 'fb9 fb10 fb11 fb12 fb13 fb14 fb15 fb16 fb17'],
+      ['we', 'Syedul · Web Experience', 4, 'we1 we2 we3'], ['fsd', 'Patrick · FSD Ordering', 3, 'fsd2 fsd3'], ['ck', 'Mikhail · Customer Checkout', 1, 'chk3 chk4'],
+      ['om', 'Derya · Order Management', 3, 'om1 om2'], ['se', 'Chloe · Search', 5, 's3 sfd s4'], ['cw', 'Stephan · Corporate Websites', 3, 'cw1 cw2'],
+      ['cat', 'Jordi · Digital Catalogues', 4, 'cat1 catba cat2 catview'], ['mco', 'Jaleed · M.Companion', 4, 'compm2 comp1 comp6'], ['css', 'Ediz · Customer Self Service', 4, 'css1 cssa cssb cssc cssd css3'],
+      ['ccov', 'Louise · CCOV', 3, 'ccov1 ccov2 ccov3'], ['ev', 'Annette · Evaluate API', 3, 'ev2 ev3'], ['tech', 'Saghi · Tech under the hood', 10, 'hood hood2 hood4 ev2b hood3 hood5 hood6'],
+      ['end', 'Tareq · Next steps', 2, 'asks close']];
+    const byId = {}; SEG.forEach((g, i) => g[3].split(' ').forEach(id => byId[id] = i));
+    const TOTAL = SEG.reduce((a, g) => a + g[2] * 60, 0);
+    let st = { acc: {}, run: null, t0: 0 }; try { st = Object.assign(st, JSON.parse(localStorage.getItem('lvl-tm') || '{}')); } catch (e) { }
+    let cur = 0;
+    const el = document.createElement('div'); el.className = 'tmr'; el.hidden = true;
+    el.innerHTML = `<button class="tm-go" aria-label="Start or pause timer" title="Start / pause (T)">▶</button><div class="tm-b"><span class="tm-n"></span><span class="tm-t"><b class="tm-v">00:00</b><i class="tm-of"></i></span><span class="tm-bar"><i></i></span><span class="tm-tot"></span></div><button class="tm-rs" aria-label="Reset this timer" title="Reset this part">↺</button>`;
+    const rt = document.querySelector('.hud .right') || document.querySelector('.right'); rt.insertBefore(el, rt.firstChild);
+    const save = () => { try { localStorage.setItem('lvl-tm', JSON.stringify(st)); } catch (e) { } };
+    const el_ = k => (st.acc[k] || 0) + (st.run === k ? (Date.now() - st.t0) / 1000 : 0);
+    const fmt = x => { x = Math.max(0, Math.round(x)); return String(Math.floor(x / 60)).padStart(2, '0') + ':' + String(x % 60).padStart(2, '0'); };
+    const pause = () => { if (st.run) { st.acc[st.run] = el_(st.run); st.run = null; save(); } };
+    const start = k => { pause(); st.run = k; st.t0 = Date.now(); save(); };
+    function draw() {
+      const g = SEG[cur]; if (!g) return; const k = g[0], lim = g[2] * 60, e = el_(k), over = e > lim;
+      el.querySelector('.tm-n').textContent = g[1];
+      el.querySelector('.tm-v').textContent = over ? '+' + fmt(e - lim) : fmt(e);
+      el.querySelector('.tm-of').textContent = over ? ' over ' + g[2] + ':00' : ' / ' + fmt(lim);
+      el.querySelector('.tm-bar i').style.width = Math.min(100, e / lim * 100) + '%';
+      const tot = SEG.reduce((a, s2) => a + el_(s2[0]), 0);
+      el.querySelector('.tm-tot').textContent = `Total ${fmt(tot)} / ${Math.round(TOTAL / 60)} min`; el.title = `${g[1]} · ${g[2]} min · Total ${fmt(tot)} of ${Math.round(TOTAL / 60)} min · T to start/pause`;
+      el.classList.toggle('on', st.run === k); el.classList.toggle('over', over); el.classList.toggle('warn', !over && e > lim - 30 && e > 0);
+      el.querySelector('.tm-go').textContent = st.run === k ? '❚❚' : '▶';
+    }
+    window.tmSeg = s => {
+      const i = byId[s.id]; if (i === undefined) return; const was = st.run;
+      if (i !== cur && was && was === SEG[cur][0]) start(SEG[i][0]);
+      cur = i; el.hidden = false; draw();
+    };
+    el.addEventListener('click', e => { e.stopPropagation(); const k = SEG[cur][0];
+      if (e.target.closest('.tm-go')) { st.run === k ? pause() : start(k); }
+      else if (e.target.closest('.tm-rs')) { if (st.run === k) st.t0 = Date.now(); st.acc[k] = 0; save(); }
+      draw(); });
+    window.tmToggle = () => { const k = SEG[cur][0]; st.run === k ? pause() : start(k); draw(); };
+    setInterval(() => { if (st.run) draw(); }, 500);
+  })();
 
   /* ---------- progress bar: hover shows the slide, click jumps ---------- */
   const bhit = document.createElement('div'); bhit.className = 'bhit'; bhit.innerHTML = '<span class="btip"></span>'; stage.appendChild(bhit);
@@ -4315,7 +4384,7 @@ const Art = (() => {
 
   /* ---------- single-letter shortcuts wait a beat, so typed secret words do not toggle things ---------- */
   let pendK = null, pendT = 0, lastLetter = 0;
-  const SHORT = { d: () => { DISP.dim = DISP.dim >= 60 ? 0 : DISP.dim >= 30 ? 60 : 30; applyDisp(); }, e: () => { DISP.wide = !DISP.wide; applyDisp(); }, f: () => toggleFlags(), v: () => togglePeek(), s: () => toggleStepping(), g: () => startGame(), o: () => ov.hidden ? openOv() : closeOv(), t: () => toggleTimer(), l: () => toggleLaser(), p: () => cast.hidden ? openCast() : closeCast(), w: () => cast.hidden ? openCast() : closeCast() };
+  const SHORT = { t: () => { if (!DISP.timer) { DISP.timer = true; applyDisp(); } else window.tmToggle && window.tmToggle(); }, d: () => { DISP.dim = DISP.dim >= 60 ? 0 : DISP.dim >= 30 ? 60 : 30; applyDisp(); }, e: () => { DISP.wide = !DISP.wide; applyDisp(); }, f: () => toggleFlags(), v: () => togglePeek(), s: () => toggleStepping(), g: () => startGame(), o: () => ov.hidden ? openOv() : closeOv(), l: () => toggleLaser(), p: () => cast.hidden ? openCast() : closeCast(), w: () => cast.hidden ? openCast() : closeCast() };
   function queueShortcut(k) { const now = Date.now(), burst = now - lastLetter < 330; lastLetter = now; clearTimeout(pendT); if (burst) { pendK = null; return; } pendK = k; pendT = setTimeout(() => { if (pendK && SHORT[pendK]) SHORT[pendK](); pendK = null; }, 330); }
 
   /* ---------- input ---------- */
