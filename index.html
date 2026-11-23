@@ -1483,6 +1483,96 @@ mark.hl { background: linear-gradient(transparent 55%, rgba(255, 184, 28, .55) 5
 .bhit:hover ~ .bar, .bhit:hover + .bar { height: calc(var(--u) * .8); }
 .bar i { transition: width .45s cubic-bezier(.2, .8, .3, 1) !important; }
 .panel.fx-rise:not(.out), .panel.fx-slide:not(.out), .panel.fx-zoom:not(.out), .panel.fx-wipe:not(.out) { animation-duration: .5s !important; animation-timing-function: cubic-bezier(.2, .8, .25, 1) !important; }
+
+/* ---- round 3g: bigger labels, team strips, om1/cw1 ---- */
+.num .l { font-size: max(calc(var(--u) * 1.08 * var(--fs)), calc(var(--u) * 1)) !important; }
+.num .nd { font-size: max(calc(var(--u) * 1 * var(--fs)), calc(var(--u) * .9)) !important; }
+.gbar { font-size: max(calc(var(--u) * 1.05 * var(--fs)), calc(var(--u) * .95)); padding: calc(var(--u) * .6) calc(var(--u) * 1.1); }
+.tbar { font-size: max(calc(var(--u) * 1.15 * var(--fs)), calc(var(--u) * 1.02)); padding: calc(var(--u) * .75) calc(var(--u) * 1.2); border-left-width: calc(var(--u) * .5); }
+.gbar b, .tbar b { font-size: calc(var(--u) * .95); }
+.rck, .rhk { font-size: calc(var(--u) * 1.02) !important; letter-spacing: .02em; }
+.rct img, .rct .pxi { width: calc(var(--u) * 2.2) !important; height: calc(var(--u) * 2.2) !important; }
+.ofn { font-size: calc(var(--u) * 1.05) !important; }
+.dl, .dh { font-size: calc(var(--u) * 1.12) !important; font-weight: 800 !important; }
+.hat b { font-size: calc(var(--u) * 1.2) !important; }
+.ho span { font-size: calc(var(--u) * 1.12) !important; font-weight: 800; color: var(--navy); }
+.pcard .pg { font-size: max(calc(var(--u) * .9 * var(--fs)), calc(var(--u) * .9)) !important; line-height: 1.3; }
+.pcard .prr { font-size: max(calc(var(--u) * .85 * var(--fs)), calc(var(--u) * .86)) !important; }
+.pcard .prr i { font-size: calc(var(--u) * .66) !important; }
+.panel[data-id="sp"] .prr.nx { display: none; }
+.lvs { flex: none; align-self: flex-start; display: flex; align-items: center; gap: calc(var(--u) * .8); background: var(--gold); color: var(--navy); padding: calc(var(--u) * .5) calc(var(--u) * 1.2) calc(var(--u) * .5) calc(var(--u) * .5); box-shadow: calc(var(--u) * .3) calc(var(--u) * .3) 0 var(--navy); }
+.lvs span { background: var(--navy); color: var(--gold2); font-size: calc(var(--u) * .78); padding: .35em .7em; }
+.lvs img { width: calc(var(--u) * 2); height: calc(var(--u) * 2); }
+.lvs b { font-size: calc(var(--u) * 1.3); font-weight: 900; }
+.panel[data-id="wsm1"] .bars { flex: 1 1 0; min-height: 0; display: flex; flex-direction: column; justify-content: space-evenly; padding: calc(var(--u) * 1) calc(var(--u) * 1.4); }
+.panel[data-id="wsm1"] .br { font-size: calc(var(--u) * 1.25); }
+.panel[data-id="wsm1"] .br .bt { height: calc(var(--u) * 1.8); }
+.panel[data-id="wsm1"] .bars .sh { font-size: calc(var(--u) * 1.5); }
+.omx, .cwx { gap: calc(var(--u) * 1.6); }
+.omp { flex: 1 1 0; min-width: 0; background: #E1F1FC; padding: calc(var(--u) * 1.3) calc(var(--u) * 1.6); display: flex; flex-direction: column; gap: calc(var(--u) * 1); box-shadow: calc(var(--u) * .35) calc(var(--u) * .35) 0 #C8D9EC; }
+.omc { align-self: flex-start; background: var(--gold); color: var(--navy); font-weight: 900; text-transform: uppercase; font-size: calc(var(--u) * 1); padding: .4em 1em; letter-spacing: .03em; }
+.omg { flex: 1; display: grid; grid-template-columns: 1.15fr 1fr; gap: calc(var(--u) * 1.4); align-items: start; }
+.omv { display: block; font-size: calc(var(--u) * 3.6); font-weight: 900; line-height: 1.05; color: var(--navy); }
+.omn { margin: calc(var(--u) * .8) 0 0; font-size: calc(var(--u) * 1.05); line-height: 1.45; color: #1F5AA8; }
+.omch > span { display: block; text-align: center; font-weight: 800; color: var(--navy); font-size: calc(var(--u) * 1); }
+.ombars { height: calc(var(--u) * 12); display: flex; justify-content: center; gap: calc(var(--u) * 1.4); align-items: flex-end; border-bottom: calc(var(--u) * .15) solid #9DB7D6; margin-top: calc(var(--u) * .5); }
+.ombars > div { width: calc(var(--u) * 5); height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; position: relative; }
+.ombars b { font-size: calc(var(--u) * 1.6); font-weight: 900; color: var(--navy); }
+.ombars i { width: 100%; max-height: 78%; background: #6FA8DC; transform-origin: bottom; } .ombars i.d { background: var(--navy); }
+.shown .ombars i { animation: omGrow .8s cubic-bezier(.2, .8, .3, 1) both .3s; } @keyframes omGrow { from { transform: scaleY(0); } }
+.ombars em { position: absolute; bottom: calc(var(--u) * -2); font-style: normal; font-weight: 800; color: var(--navy); font-size: calc(var(--u) * 1); }
+.omt { margin: calc(var(--u) * 2.6) 0 0; font-weight: 800; color: #1F5AA8; font-size: calc(var(--u) * 1.15); line-height: 1.35; }
+.omg.o2 { grid-template-columns: 1fr 1fr; } .omt.big { margin: 0; font-size: calc(var(--u) * 1.6); font-weight: 900; }
+.omf { display: flex; align-items: center; gap: .6em; border-top: calc(var(--u) * .15) solid #9DC3E6; padding-top: calc(var(--u) * .8); color: #1F5AA8; font-size: calc(var(--u) * 1.05); font-weight: 700; }
+.omf img { width: calc(var(--u) * 1.9); height: calc(var(--u) * 1.9); }
+.cwc { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: calc(var(--u) * 1.2); }
+.cwb { background: #E1F1FC; padding: calc(var(--u) * 1) calc(var(--u) * 1.2); box-shadow: calc(var(--u) * .35) calc(var(--u) * .35) 0 #C8D9EC; display: flex; flex-direction: column; gap: calc(var(--u) * .8); }
+.cwt { display: flex; justify-content: space-between; align-items: center; }
+.cwa { display: flex; align-items: center; gap: .5em; color: #1F5AA8; font-weight: 700; font-size: calc(var(--u) * 1); } .cwa img { width: calc(var(--u) * 1.8); height: calc(var(--u) * 1.8); }
+.cwg { display: grid; grid-template-columns: 1fr 1.25fr; gap: calc(var(--u) * .8); }
+.cwk { background: var(--navy); color: #fff; padding: calc(var(--u) * 1) calc(var(--u) * 1.2); display: flex; flex-direction: column; gap: .4em; }
+.cwk b { color: var(--gold2); font-size: calc(var(--u) * 3.2); font-weight: 900; line-height: 1; } .cwk span { font-size: calc(var(--u) * 1.05); line-height: 1.3; }
+.cwg ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: calc(var(--u) * .45); }
+.cwg li { flex: 1; display: flex; align-items: center; gap: .7em; background: #fff; border-left: calc(var(--u) * .4) solid var(--gold); padding: .35em .8em; font-weight: 900; color: var(--navy); font-size: calc(var(--u) * 1.08); }
+.cwg li i { font-style: normal; color: var(--gold); }
+.cwi { flex: 1; min-height: 0; display: flex; justify-content: center; }
+.cwi .bimg { max-width: 80%; } .cwi .bimg img { width: 100%; height: 100%; object-fit: contain; }
+
+.xp.omx, .xp.cwx { flex: 1 1 auto !important; min-height: 0; }
+.omg { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
+.omv { font-size: calc(var(--u) * 3); }
+.omn { font-size: calc(var(--u) * .98); }
+.ombars { height: calc(var(--u) * 10); gap: calc(var(--u) * 1); }
+.ombars > div { width: calc(var(--u) * 3.8); }
+.ombars b { font-size: calc(var(--u) * 1.35); }
+.omt { font-size: calc(var(--u) * 1.02); margin-top: calc(var(--u) * 2.8); }
+.omg.o2 { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); } .omg.o2 .omv { white-space: nowrap; }
+.omt.big { font-size: calc(var(--u) * 1.45); }
+.cwi { min-height: 0; } .cwi .bimg { height: 100%; max-width: 88%; } .cwi .bimg img { max-height: 100%; }
+.rck, .rhk { font-size: calc(var(--u) * 1.15) !important; }
+.hat b { font-size: calc(var(--u) * 1.02) !important; line-height: 1.15; }
+.ho span { font-size: calc(var(--u) * .98) !important; }
+
+.panel[data-id="report"] .rhv .count { font-size: calc(var(--u) * 5.2 * var(--fs)); }
+.panel[data-id="report"] .rc { padding: calc(var(--u) * .7) calc(var(--u) * .9); }
+.panel[data-id="report"] .rhero { padding-top: calc(var(--u) * .9); padding-bottom: calc(var(--u) * .9); }
+.panel[data-id="dash2"] .dt { padding: calc(var(--u) * .45) calc(var(--u) * .6) !important; gap: calc(var(--u) * .1); }
+.panel[data-id="dash2"] .dnut { padding: calc(var(--u) * .5); gap: calc(var(--u) * .2); }
+.panel[data-id="dash2"] .dnut svg { max-height: calc(var(--u) * 9); }
+.panel[data-id="dash2"] .dleg { gap: 0; }
+
+.panel[data-id="dash2"] .dnut { display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto 1fr; column-gap: calc(var(--u) * 1.2); align-items: center; }
+.panel[data-id="dash2"] .dnut .dh { grid-column: 1 / -1; }
+.panel[data-id="dash2"] .dnut .dnw { width: calc(var(--u) * 10); }
+.panel[data-id="dash2"] .dleg { font-size: calc(var(--u) * .95); gap: calc(var(--u) * .35); }
+.omx .omp:first-child { flex: 1.35 1 0; }
+.omg { align-items: stretch; }
+.omg.o2 { grid-template-columns: 1fr; align-content: start; gap: calc(var(--u) * 1.6); }
+.omg.o2 .omv { font-size: calc(var(--u) * 4); }
+.omt.big { font-size: calc(var(--u) * 1.7); max-width: 26ch; }
+.cwk b { font-size: calc(var(--u) * 2.6); white-space: nowrap; }
+.cwg { grid-template-columns: minmax(0, .9fr) minmax(0, 1.3fr); }
+.panel[data-id="dash2"] .dnut .dnw { width: calc(var(--u) * 11); } .panel[data-id="dash2"] .dc b { font-size: calc(var(--u) * 1.55); }
 </style>
 </head>
 <body>
@@ -1833,7 +1923,7 @@ const SLIDES = [
       { k: "ask", h: "Risks · Needs", items: [{ t: "Risks", sub: ["PoC outcome not satisfying like false approvals, takes too long etc.", "Too high country document complexity", "Potential new local integrations needed", "Legal objections for processing personal information with AI"] }, { t: "Needs", sub: ["Support Design council process", "Country support"] }] }] },
 
   { id: "pc", icon: "unlock", scene: 4, squad: "Punchout", tag: "02 Strategic projects · Punchout", period: "Achieved in FY26", sub: "Electronic ordering integration with Key Account Customers", src: "19", who: [lead("Punchout", "Mikhail Rotenberg")],
-    nums: [["237", "Orders", "LIVE IN JW Locations: ES, PT, RO, MD"], ["48K€*", "Order total amount", "*Order total amount since April until end of September 26"]],
+    live: "JW Locations: ES, PT, RO, MD", nums: [["237", "Orders", ""], ["48K€*", "Order total amount", "*Order total amount since April until end of September 26"]],
     secs: [{ k: "succ", h: "What we did", items: ["Development of Punchout ordering.", "Close alignment with JW customer team for implementation and testing and rollout.", "Went live in June 26 in ES, rolled out to 4 countries with JW."] }],
     shots: [["erp", "Electronic ordering integration with Key Account Customers"]] },
 
@@ -2054,7 +2144,7 @@ const STOPS = [
     hero: { h: "FSD Digital Sales", v: 4.0, g: "+23.3%", share: "63% share", sg: "+1.6%", parts: [["M.Shop & local solutions", 67.5, "2.7bn €", "+15.5%", "67.5% share", "-6.3%", 1], ["M.Companion", 32.5, "1.3bn €", "+43.4%", "32.5% share", "+16.3%", 0]] },
     cards: [["value", "Digital Sales", 16.1, "%", "+21.6%", "share of sales · 1.1 pp below target"], ["goal", "PDEs", ">600", "M", "+23.8%", "Purchase Driving Events in full FY25/26 · 108.2% target achievement"], ["customer", "Active buying digital identities", 4.5, "m", "+29.2%", "34.0% of total buying · +35.5%"], ["unlock", "Active card holders", 5.4, "m", "+34.8%", "76.7% buying · -2.8%"]] } });
   by.dash1.branches[0].leaves[0] = ["FSD", 1.3, "bn €", 1, "43.4%"];
-  set("o2o", { secs: [], shots: [], facts: [["websites", "NextCMS", "40k €", "+22%", "Contributed ==40k €== to sales (+22%)"], ["catalogue", "Digital catalogues", "47k €", "+18%", "Drove ==47k €== in sales (+18%) via dynamic catalogues and product interactions"], ["delivery", "M.Shop", "7.2m €", "+17,3%", "Contributed ==33%== of sales, an uplift of 7.2m € (+17,3%)"], ["app", "M.Companion", "31m €", "+45%", "Attributed sales up 31m € (+45%): ==66% of the O2O sales=="]] });
+  set("o2o", { secs: [], shots: [], facts: [["websites", "NextCMS", "40k €", "+22%", "Contributed ==40k €== to sales (+22%)"], ["catalogue", "Digital catalogues", "47k €", "+18%", "==~0.3m € O2O==, +18% vs FY25 · Drove ==47k €== in sales (+18%) via dynamic catalogues and product interactions"], ["delivery", "M.Shop", "7.2m €", "+17,3%", "Contributed ==33%== of sales, an uplift of 7.2m € (+17,3%)"], ["app", "M.Companion", "31m €", "+45%", "Attributed sales up 31m € (+45%): ==66% of the O2O sales=="]] });
 
   /* ---------- content synced to the final deck ---------- */
   set("map", { title: "Agenda: who presents what", sub: "Seven parts · tap a part to jump to it",
@@ -2127,7 +2217,7 @@ const STOPS = [
   const FTB = [
     F({ id: "fb1", icon: "web", scene: 2, squad: "Web Experience", period: "Contextual Geolocation", src: "31", who: [AK], area: "INT – FY25/26",
       blocks: [["what", "We request (geo)location only in context, and with clear reasoning that explains the benefit for customers."]],
-      view: { kind: "ba", a: [["f-we-geo-b", "Before"]], b: [["f-we-geo-a1", "After"], ["f-we-geo-a2", "After"]] } }),
+      view: { kind: "ba", a: [["f-we-geo-b", "Before"]], b: [["f-we-geo-a1", "After"]] } }),
     F({ id: "fb2", icon: "web", scene: 2, squad: "Web Experience", period: "Search store via MAPS API", src: "31", who: [AK], area: "INT – FY25/26",
       blocks: [["what", "We added intelligence to the Store search to match store data not only based on simple text search but rather via leveraging google maps API."], ["list", ["This also unlocks search by customer’s zip code.", "It also sorts results based on distance from the identified Point of Interest"]]],
       view: { kind: "ba", a: [["f-we-map-b", "Before"]], b: [["f-we-map-a", "After"]] } }),
@@ -2261,7 +2351,7 @@ const STOPS = [
   by.catba.pp = "ba"; by.catba.ba = ["PDP", ["pdpB", "PDP · Before"], ["pdpA", "PDP · After · with «Add to Cart»"], ["pdpM", "PDP · After · mobile"], "Before", "After · with «Add to Cart»"];
   by.catview.pp = "ba"; by.catview.ba = ["Catalogue View", ["cvB", "Catalogue View · In FY26"], ["cvA", "Catalogue View · Coming soon in FY27"], ["cvM", "Catalogue View · Coming soon in FY27 · mobile"], "In FY26", "Coming soon in FY27"];
   by.comp1.view = { ...by.comp1.view, imgs: [["not1", "Notification Center"], ["not2", "Notification Center · Messages"], ["not3", "Notification Center · Order details"]] };
-  by.css1.shots = []; by.css1.pp = 'big3';
+  by.css1.shots = []; by.om1.pp = "om1"; by.cw1.pp = "cw1"; by.ccov1.subX = "FY25/26 milestones"; by.css1.pp = 'big3';
   by.s3.nums = (by.s3.nums || []).filter(n => !/12s/.test(n[0]));
   const TS = [["Saghi", "Platform and technology"]];
   const tech = (id, squad, period, src, o) => by[id] = Object.assign({ id, icon: "platform", scene: 4, room: 38, squad, period, src, who: TS }, o);
@@ -2334,10 +2424,10 @@ const STOPS = [
   ];
   const JL = [["Jaleed", "M.Companion"]], ED = [["Ediz", "Customer Self Service"]];
   const cssF = (id, h, prob, st, imgs, src) => ({ id, icon: "service", scene: 4, room: 35, type: "fix", squad: "Customer Self Service", period: h, src, who: ED, blocks: [["prob", prob], ["status", st]], view: { kind: imgs.length > 1 ? "row" : "one", imgs: imgs.map(i => [i, h]) }, hero: 1 });
-  [cssF("cssa", "Asking for missing/outdated contact data + consent", "Contact data plus marketing consent might be outdated in our customer master data. Therefore we ask the customer in case the data is missing or not had been updated for a longer time.", "Activated in all countries", ["cssA"], "72"),
-   cssF("cssb", "Verification of Email addresses and mobile numbers", "Unverified contact data can lead to legal GDPR cases and to a bad customer master data quality.", "Email Verification live in 14 countries. Activation ongoing. Mobile activation starts soon.", ["cssB"], "72"),
-   cssF("cssc", "Display of license information", "As a METRO customer, certain purchases (e.g., alcohol, tobacco) require valid licenses. Customers needs to visit the store in order to get information about licenses they provided to METRO.", "Activated in all countries using licenses", ["cssC"], "73"),
-   cssF("cssd", "More integrations... (Freshdesk, Dish)", "As a METRO Customer I want to get easy access to Faq, help and support. As a METRO Customer I want to be informed about additional services.", "Activated in all countries that has Freshdesk activated & All DISH countries", ["cssD1", "cssD2"], "73")].forEach(x => by[x.id] = x);
+  [cssF("cssa", "Asking for missing/outdated contact data + consent", "Contact data and ==marketing consent== may be ==outdated== in our customer master data. We ask customers when data is ==missing or not updated for a long time==.", "Activated in all countries", ["cssA"], "72"),
+   cssF("cssb", "Verification of Email addresses and mobile numbers", "==Unverified contact data== can lead to ==legal GDPR cases== and ==poor customer master data quality==.", "Email Verification live in 14 countries. Activation ongoing. Mobile activation starts soon.", ["cssB"], "72"),
+   cssF("cssc", "Display of license information", "Purchases like ==alcohol and tobacco== need ==valid licenses==. Customers had to ==visit the store== to see the licenses they gave METRO.", "Activated in all countries using licenses", ["cssC"], "73"),
+   cssF("cssd", "More integrations... (Freshdesk, Dish)", "Customers want ==easy access to FAQ, help and support== and to be ==informed about additional services==.", "Activated in all countries that has Freshdesk activated & All DISH countries", ["cssD1", "cssD2"], "73")].forEach(x => by[x.id] = x);
   const T2 = ["Tareq Sewail", "Digital Commerce"]; const TL = ["Tim Lambertz", "M.Companion"];
   const WHO = { report: [CS], dash1: [TL], dash2: [TL], o2o: [CS], quote: [T2], hats: [T2], sp: [T2], h1: [CH], h2: [CH], wsm1: [["Bastian Janssen", "Wholesale Media"]], wsm2: [["Bastian Janssen", "Wholesale Media"]], wsm3: [["Bastian Janssen", "Wholesale Media"]], comp4b: [["Bastian Janssen", "Wholesale Media"]],
     comp1: JL, comp5: JL, comp6: JL, bac: [["Christoph Franke", "AI Document validation"]], jul: [["Stefan Trasca", "Project Juliet"]] };
@@ -3018,6 +3108,7 @@ const Art = (() => {
     sky(170, ['#CFE8FF', '#DDEEFF', '#E9F4FF', '#F3F9FF', '#FFF6DE', '#FFEFD0']);
     R(0, 192, W, 78, '#7C8AA0'); R(0, 192, W, 3, '#C7D1DE');
     [[10, '#E5484D', '#FFFFFF', '#1F6FD1'], [100, '#FFFFFF', '#1F6FD1', '#E5484D']].forEach(([x, a, b, d]) => { R(x, 110, 76, 82, '#F1F5FA'); R(x - 3, 98, 82, 14, NAVY); R(x - 3, 112, 82, 3, Y); R(x + 8, 124, 60, 44, '#BFE2FF'); R(x + 8, 124, 60, 2, NAVY); R(x + 28, 150, 20, 42, '#E6F6FF'); R(x + 20, 62, 4, 40, '#6F7F95'); R(x + 24, 62, 18, 4, a); R(x + 24, 66, 18, 4, b); R(x + 24, 70, 18, 4, d); });
+    R(86, 104, 14, 88, '#E3EAF3'); R(86, 104, 14, 2, '#C7D1DE'); R(90, 150, 6, 42, '#C9D6E6');
     tree(184, 192, 1);
   }, anim(t) {
     const tools = [[200, 70], [250, 110], [330, 60], [400, 100], [440, 150]], hub = [48, 96];
@@ -3774,6 +3865,22 @@ const Art = (() => {
   const nbox = (cls, hIcon, h, items) => `<section class="nb ${cls} step" data-k="${cls === 'dk' ? 'proj' : 'basics'}" style="--d:${cls === 'dk' ? 1 : 0}"><div class="nbh"><img class="pxi" src="${IC(hIcon)}" alt=""><b>${esc(h)}</b></div><ol>${items.map(([t, d], i) => `<li><span class="nn">${i + 1}</span><div><b>${md(t)}</b>${Array.isArray(d) ? `<ul>${d.map(x => `<li>${md(x)}</li>`).join('')}</ul>` : d ? `<p>${md(d)}</p>` : ''}</div></li>`).join('')}</ol></section>`;
   const TLX = x => ((x - 95) / 1405 * 100).toFixed(2) + '%';
   const PP = {
+
+    om1: s => `<div class="xp two omx">
+      <section class="omp step" data-k="succ" style="--d:0"><span class="omc">UI improvements</span>
+        <div class="omg"><div><b class="omv">20% less incidents*</b><p class="omn"><i>*excluding Security findings</i><br>811 in FY25 dropped to 650 FY26<br>Meanwhile number of orders increasing<br>14.5M Orders in FY26 (17% more orders)</p></div>
+        <div class="omr"><div class="omch"><span>Incidents</span><div class="ombars"><div><b>811</b><i style="height:100%"></i><em>FY25</em></div><div><b>650</b><i class="d" style="height:80%"></i><em>FY26</em></div></div></div>
+        <p class="omt">Reduce SDCorps by improving OM and Invoice UI to give transparency and enable users resolve issues themselves</p></div></div>
+        <div class="omf"><img class="pxi" src="${IC('markets')}" alt="">All countries · FY2026</div></section>
+      <section class="omp step" data-k="succ" style="--d:1"><span class="omc">Order reminder notifications</span>
+        <div class="omg o2"><div><b class="omv">1 Country</b><p class="omn">FR is live</p></div><p class="omt big">Order reminder push notification to M.Companion. Rollout planned after frozen zone</p></div>
+        <div class="omf"><img class="pxi" src="${IC('markets')}" alt="">FR · FY2026</div></section></div>`,
+    cw1: s => {
+      const col = (chip, big, lab, rows, mark, img, cap) => `<section class="cwc step" data-k="succ"><div class="cwb"><div class="cwt"><span class="omc">${chip}</span><span class="cwa"><img class="pxi" src="${IC('markets')}" alt="">INT – QBR2 FY25/26</span></div>
+        <div class="cwg"><div class="cwk"><b>${big}</b><span>${lab}</span></div><ul>${rows.map(r => `<li><i>${mark}</i>${r}</li>`).join('')}</ul></div></div>
+        <div class="cwi">${pimg(img, cap)}</div></section>`;
+      return `<div class="xp two cwx">${col('Business', '+3', 'METRO AG Corporate Websites relaunched', ['MPULSE → METRO STORIES', 'Investors → Company', 'Corporate Responsibility'], '➜', 'cw-stories', 'METRO Stories')}${col('Continuity', '→ 10.4', 'Upgrade of Sitecore Managed Cloud to latest version CMS 10.4', ['Ensure continuous support', 'Remove technical debts', 'Improve authoring UX'], '✓', 'cw-tree', 'Sitecore content tree')}</div>`;
+    },
     big3: s => `<div class="xp b3">${s.nums.map(([v, l, d], i) => `<div class="b3c step" data-k="succ" style="--d:${i}"><span class="b3t pix">${esc(d.split(' · ')[0])}</span><b>${esc(v)}</b><p>${esc(l)}.</p><span class="b3d"><img class="pxi" src="${IC('markets')}" alt="">${esc(d.split(' · ')[1] || '')}</span></div>`).join('')}</div>`,
 
     we1: s => {
@@ -3860,6 +3967,7 @@ const Art = (() => {
     if (s.board) return h + `<div class="board c${s.board.cols || 3}">${s.board.cards.map((c, i) => `<section class="bc step${c.w ? ' w' + c.w : ''}" style="--d:${i}"><h4>${md(c.h)}</h4>${c.sub ? `<p class="bsub">${md(c.sub)}</p>` : ''}${(c.items || []).length ? `<ul>${c.items.map(item).join('')}</ul>` : ''}${c.p ? `<p class="bp">${md(c.p)}</p>` : ''}${(c.imgs || []).length ? `<div class="bimgs">${c.imgs.map(([k, a]) => `<button class="bimg" data-g="0" data-src="${k}" data-cap="${esc(a)}"><img src="${IM(k)}" alt="${esc(a)}"></button>`).join('')}</div>` : ''}${c.foot ? `<p class="bfoot">${md(c.foot)}</p>` : ''}</section>`).join('')}</div>` + srcHtml(s);
     if (s.pp && PP[s.pp]) return h + PP[s.pp](s) + srcHtml(s);
     if (s.nums) h += numsHtml(s.nums);
+    if (s.live) h += `<div class="lvs step" data-k="succ" style="--d:1"><span class="pix">Live in</span><img class="pxi" src="${IC('markets')}" alt=""><b>${esc(s.live)}</b></div>`;
     if (s.type === 'o2o') h += o2oHtml(s);
     if (s.type === 'route') h += routeHtml(s);
     if (s.type === 'fix') return h + fixHtml(s) + srcHtml(s);
@@ -3893,6 +4001,7 @@ const Art = (() => {
     if (SEC[s.stop] && s.id !== 'sp' && !s.ftb) { const nm = s.squad && s.squad !== 'Harmonization' ? s.squad : (s.squad === 'Harmonization' ? '' : s.title); title = SEC[s.stop]; sub = [nm, clean(s.squad ? s.period : '')].filter(Boolean).join(' · '); if (s.squad === 'Harmonization') sub = clean(s.period) || nm; }
     else sub = clean(sub);
     if (s.stop === 4 && !sub && s.squad) sub = 'Achieved in FY26';
+    if (s.subX) sub = s.subX;
     return [title || s.title || '', sub || ''];
   }
   const srcHtml = s => ''; const srcHtml0 = s => s.src ? `<div class="src pix">${s.src === '—' ? 'Not in the deck yet' : /^\d/.test(s.src) ? `From deck slide ${esc(s.src)}` : `Source: ${esc(s.src)}`}</div>` : '';
@@ -3965,7 +4074,7 @@ const Art = (() => {
     const fbm = /^fb(\d+)$/.exec(s.id);
     const fx = fbm ? ['slide', 'rise'][(+fbm[1]) % 2] : /^(chk2|atpc)$/.test(s.id) ? 'rise' : s.cards ? 'rise' : s.type === 'dash' ? 'zoom' : s.lanes ? 'wipe' : (s.type === 'projects' || s.quests || s.type === 'collect' || s.type === 'matrix') ? 'zoom' : (s.nums && s.nums.length > 2) ? 'rise' : 'slide';
     const sqChanged = !changed && prev >= 0 && SQ(SLIDES[prev]) !== SQ(s) && s.type !== 'cover' && s.type !== 'close';
-    const put = () => { panel.classList.remove('fx-slide', 'fx-rise', 'fx-flip', 'fx-wipe', 'fx-zoom', 'fx-swing', 'fx-pop'); void panel.offsetWidth; panel.classList.add('fx-' + fx); panel.innerHTML = render(s); panel.classList.toggle('cover', s.type === 'cover' || s.type === 'close'); panel.classList.remove('focusing', 'shown'); fit(); panel.classList.toggle('ai-wide', s.id === 'ai'); panel.classList.remove('out'); addPreview(); warm(n + 1); warm(n - 1); panel.querySelectorAll('img').forEach(im => im.complete || im.addEventListener('load', () => fit(), { once: true })); };
+    const put = () => { panel.classList.remove('fx-slide', 'fx-rise', 'fx-flip', 'fx-wipe', 'fx-zoom', 'fx-swing', 'fx-pop'); void panel.offsetWidth; panel.classList.add('fx-' + fx); panel.innerHTML = render(s); panel.classList.toggle('cover', s.type === 'cover' || s.type === 'close'); panel.classList.remove('focusing', 'shown'); fit(); panel.classList.toggle('ai-wide', s.id === 'ai'); panel.dataset.id = s.id; panel.classList.remove('out'); addPreview(); warm(n + 1); warm(n - 1); panel.querySelectorAll('img').forEach(im => im.complete || im.addEventListener('load', () => fit(), { once: true })); };
     clearTimeout(swapT);
     if (prev < 0 || reduce) put(); else { panel.classList.add('out'); swapT = setTimeout(put, 200); }
     reveal(reduce ? 0 : (prev < 0 ? 300 : wait));
