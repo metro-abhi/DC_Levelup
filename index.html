@@ -1631,6 +1631,22 @@ mark.hl { background: linear-gradient(transparent 55%, rgba(255, 184, 28, .55) 5
 .panel[data-id="cat2"] .sec > ul { flex: 1; display: flex; flex-direction: column; justify-content: space-evenly; }
 .panel[data-id="cat2"] .sec li { font-size: calc(var(--u) * 1.25) !important; }
 .panel[data-id="cat2"] .sec li b, .panel[data-id="cat2"] .sec li strong { font-size: calc(var(--u) * 1.4) !important; }
+
+/* ---- round 3i: full-screen image viewer + bigger timer + overtime sound ---- */
+.lb:not(.pair) figure { width: 94vw !important; height: 90vh !important; max-width: 94vw !important; max-height: 90vh !important; padding: 0 !important; overflow: hidden; position: relative; display: block; background: #0B2447; }
+.lb:not(.pair) figure img { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; max-width: none !important; max-height: none !important; min-height: 0 !important; object-fit: contain; }
+.lb:not(.pair) figcaption { position: absolute !important; left: 0; right: 0; bottom: 0; z-index: 2; margin: 0 !important; background: rgba(11, 36, 71, .85); color: #fff; padding: calc(var(--u) * .5) calc(var(--u) * 1); text-align: center; font-size: calc(var(--u) * 1) !important; }
+.lb .lbn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 13; }
+.lb #lbp { left: calc(var(--u) * 1.4); } .lb #lbx { right: calc(var(--u) * 1.4); }
+.zbar { top: calc(var(--u) * 1.2) !important; }
+.tmr { gap: calc(var(--u) * .55) !important; padding: 0 calc(var(--u) * .7) !important; }
+.tmr button { width: calc(var(--u) * 2.15) !important; height: calc(var(--u) * 2.15) !important; font-size: calc(var(--u) * .82) !important; }
+.tmr .tm-rs { font-size: calc(var(--u) * 1.05) !important; }
+.tm-b { width: calc(var(--u) * 12) !important; gap: calc(var(--u) * .12) !important; }
+.tm-n { font-size: calc(var(--u) * .72) !important; }
+.tm-v { font-size: calc(var(--u) * 1.3) !important; }
+.tm-of { font-size: calc(var(--u) * .74) !important; }
+.tm-bar { height: calc(var(--u) * .3) !important; }
 </style>
 </head>
 <body>
@@ -4197,7 +4213,7 @@ const Art = (() => {
   const Z = { z: 1, x: 0, y: 0, drag: null, moved: false };
   const zb = document.createElement('div'); zb.className = 'zbar'; zb.innerHTML = '<button data-z="-" aria-label="Zoom out">−</button><output>100%</output><button data-z="+" aria-label="Zoom in">+</button><button data-z="0">Fit</button><span>Click, scroll or + − to zoom · drag to move · Fit to reset</span>'; lb.appendChild(zb);
   const zIm = () => lb.classList.contains('pair') ? null : $('figure img', lb);
-  function zApply() { const im = zIm(); zb.hidden = !im; if (!im) return; im.style.transformOrigin = '0 0'; im.style.transform = `translate(${Z.x}px, ${Z.y}px) scale(${Z.z})`; im.style.cursor = Z.z > 1 ? (Z.drag ? 'grabbing' : 'grab') : 'zoom-in'; $('output', zb).textContent = Math.round(Z.z * 100) + '%'; lb.classList.toggle('zoomed', Z.z > 1); }
+  function zApply() { const im = zIm(); zb.hidden = !im; if (!im) return; if (Z.z > 1) { const f = im.parentElement.getBoundingClientRect(); Z.x = Math.max(f.width * (1 - Z.z), Math.min(0, Z.x)); Z.y = Math.max(f.height * (1 - Z.z), Math.min(0, Z.y)); } else { Z.x = 0; Z.y = 0; } im.style.transformOrigin = '0 0'; im.style.transform = `translate(${Z.x}px, ${Z.y}px) scale(${Z.z})`; im.style.cursor = Z.z > 1 ? (Z.drag ? 'grabbing' : 'grab') : 'zoom-in'; $('output', zb).textContent = Math.round(Z.z * 100) + '%'; lb.classList.toggle('zoomed', Z.z > 1); }
   function zReset() { Z.z = 1; Z.x = 0; Z.y = 0; zApply(); }
   function zTo(nz, cx, cy) { const im = zIm(); if (!im) return; nz = Math.max(1, Math.min(6, nz)); const r = im.getBoundingClientRect(), l0 = r.left - Z.x, t0 = r.top - Z.y;
     if (cx === undefined) { cx = l0 + r.width / Z.z / 2; cy = t0 + r.height / Z.z / 2; }
@@ -4347,6 +4363,9 @@ const Art = (() => {
     const byId = {}; SEG.forEach((g, i) => g[3].split(' ').forEach(id => byId[id] = i));
     const TOTAL = SEG.reduce((a, g) => a + g[2] * 60, 0);
     let st = { acc: {}, run: null, t0: 0 }; try { st = Object.assign(st, JSON.parse(localStorage.getItem('lvl-tm') || '{}')); } catch (e) { }
+    const chimed = new Set(); let audioArmed = false, actx = null;
+    function armAudio() { audioArmed = true; try { actx = actx || new (window.AudioContext || window.webkitAudioContext)(); if (actx.state === 'suspended') actx.resume(); } catch (e) { } }
+    function ding() { try { armAudio(); if (!actx) return; const t = actx.currentTime; [[880, 0], [587, .15]].forEach(function (pr) { const o = actx.createOscillator(), gn = actx.createGain(); o.type = 'triangle'; o.frequency.value = pr[0]; o.connect(gn); gn.connect(actx.destination); gn.gain.setValueAtTime(0, t + pr[1]); gn.gain.linearRampToValueAtTime(.2, t + pr[1] + .02); gn.gain.exponentialRampToValueAtTime(.0001, t + pr[1] + .6); o.start(t + pr[1]); o.stop(t + pr[1] + .65); }); } catch (e) { } }
     let cur = 0;
     const el = document.createElement('div'); el.className = 'tmr'; el.hidden = true;
     el.innerHTML = `<button class="tm-go" aria-label="Start or pause timer" title="Start / pause (T)">▶</button><div class="tm-b"><span class="tm-n"></span><span class="tm-t"><b class="tm-v">00:00</b><i class="tm-of"></i></span><span class="tm-bar"><i></i></span><span class="tm-tot"></span></div><button class="tm-rs" aria-label="Reset this timer" title="Reset this part">↺</button>`;
@@ -4358,6 +4377,7 @@ const Art = (() => {
     const start = k => { pause(); st.run = k; st.t0 = Date.now(); save(); };
     function draw() {
       const g = SEG[cur]; if (!g) return; const k = g[0], lim = g[2] * 60, e = el_(k), over = e > lim;
+      if (over) { if (st.run === k && audioArmed && !chimed.has(k)) { chimed.add(k); ding(); } } else chimed.delete(k);
       el.querySelector('.tm-n').textContent = g[1];
       el.querySelector('.tm-v').textContent = over ? '+' + fmt(e - lim) : fmt(e);
       el.querySelector('.tm-of').textContent = over ? ' over ' + g[2] + ':00' : ' / ' + fmt(lim);
@@ -4372,11 +4392,11 @@ const Art = (() => {
       if (i !== cur && was && was === SEG[cur][0]) start(SEG[i][0]);
       cur = i; el.hidden = false; draw();
     };
-    el.addEventListener('click', e => { e.stopPropagation(); const k = SEG[cur][0];
+    el.addEventListener('click', e => { e.stopPropagation(); armAudio(); const k = SEG[cur][0];
       if (e.target.closest('.tm-go')) { st.run === k ? pause() : start(k); }
-      else if (e.target.closest('.tm-rs')) { if (st.run === k) st.t0 = Date.now(); st.acc[k] = 0; save(); }
+      else if (e.target.closest('.tm-rs')) { if (st.run === k) st.t0 = Date.now(); st.acc[k] = 0; chimed.delete(k); save(); }
       draw(); });
-    window.tmToggle = () => { const k = SEG[cur][0]; st.run === k ? pause() : start(k); draw(); };
+    window.tmToggle = () => { armAudio(); const k = SEG[cur][0]; st.run === k ? pause() : start(k); draw(); };
     setInterval(() => { if (st.run) draw(); }, 500);
   })();
 
